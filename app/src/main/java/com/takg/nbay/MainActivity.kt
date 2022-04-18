@@ -8,6 +8,7 @@ import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
+import com.takg.nbay.ui.screens.home.HomeScreen
 import com.takg.nbay.ui.theme.NBayTheme
 
 class MainActivity : ComponentActivity() {
@@ -17,22 +18,18 @@ class MainActivity : ComponentActivity() {
             NBayTheme {
                 // A surface container using the 'background' color from the theme
                 Surface(color = MaterialTheme.colors.background) {
-                    Greeting("Android")
+                    HomeScreen()
                 }
             }
         }
     }
 }
 
-@Composable
-fun Greeting(name: String) {
-    Text(text = "Hello $name!")
-}
 
 @Preview(showBackground = true)
 @Composable
 fun DefaultPreview() {
     NBayTheme {
-        Greeting("Android")
+        HomeScreen()
     }
 }
