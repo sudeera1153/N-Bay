@@ -21,6 +21,8 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.takg.nbay.Nbay
 import com.takg.nbay.R
+import com.takg.nbay.ui.screens.auth.LoginScreen
+import com.takg.nbay.ui.screens.auth.SignUpScreen
 import com.takg.nbay.ui.theme.NBayTheme
 import kotlinx.coroutines.delay
 
@@ -29,10 +31,18 @@ fun navigation(){
     val navController = rememberNavController()
     NavHost(navController = navController, startDestination = "splash_screen"){
         composable("splash_screen"){
-            SplashScreen(navController = navController)
+            SplashScreen(navController)
         }
         composable("main_screen"){
             Nbay()
+        }
+        composable("signup_screen")
+        {
+            SignUpScreen(navController)
+        }
+        composable("login_screen")
+        {
+            LoginScreen(navController)
         }
     }
 }
@@ -50,7 +60,7 @@ fun SplashScreen(navController: NavController){
         )
 
         delay(3000L)
-        navController.navigate("main_screen")
+        navController.navigate("signup_screen")
     }
     Box(contentAlignment = Alignment.Center,modifier = Modifier.fillMaxSize()) {
         Image(painter = painterResource(id = R.drawable.nbay_cropped), contentDescription ="Logo" )
