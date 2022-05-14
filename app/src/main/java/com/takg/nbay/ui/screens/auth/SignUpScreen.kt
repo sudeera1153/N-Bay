@@ -63,23 +63,16 @@ fun SignUpScreen(navController: NavController)
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Image(painter = painterResource(id = R.drawable.signupbg), contentDescription ="Signup BG",
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(250.dp)
-                .padding(vertical = 16.dp),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(250.dp)
+                    .padding(vertical = 16.dp),
             )
             Text(text = "Sign-Up",
-            style = MaterialTheme.typography.h5,
-            fontWeight = FontWeight.Bold,
-            modifier = Modifier.align(Alignment.Start)
+                style = MaterialTheme.typography.h5,
+                fontWeight = FontWeight.Bold,
+                modifier = Modifier.align(Alignment.Start)
             )
-            SocialSignUp(
-                modifier = Modifier.padding(vertical = 25.dp)
-            )
-            Text(text = "Or Register with Email",
-            color = Color.LightGray,
-            style = MaterialTheme.typography.caption,
-            modifier = Modifier.padding(vertical = 12.dp))
             PrimaryTextField(
                 value = username,
                 modifier = Modifier
@@ -96,7 +89,7 @@ fun SignUpScreen(navController: NavController)
                 },
                 leadingIcon = {Icon(Icons.Outlined.Person, contentDescription = "Username Icon") },
                 onValueChange = {username=it},
-                )
+            )
             PrimaryTextField(
                 value = email,
                 modifier = Modifier
@@ -130,16 +123,16 @@ fun SignUpScreen(navController: NavController)
                 },
                 leadingIcon = {Icon(Icons.Outlined.VpnKey, contentDescription = "Password Icon") },
                 trailingIcon = {
-                               IconButton(onClick = {passwordvisibility = !passwordvisibility}) {
-                                   val icon = if(passwordvisibility) Icons.Outlined.Visibility else Icons.Outlined.VisibilityOff
-                                   Icon(icon, contentDescription = "Visibility Password")
-                               }
+                    IconButton(onClick = {passwordvisibility = !passwordvisibility}) {
+                        val icon = if(passwordvisibility) Icons.Outlined.Visibility else Icons.Outlined.VisibilityOff
+                        Icon(icon, contentDescription = "Visibility Password")
+                    }
                 },
                 visualTransformation = if(passwordvisibility) VisualTransformation.None else PasswordVisualTransformation(),
                 onValueChange = {password=it},
             )
             Button(onClick = {
-                             navController.navigate("login_screen")
+                navController.navigate("login_screen")
             },
                 modifier = Modifier
                     .fillMaxWidth()
@@ -151,7 +144,7 @@ fun SignUpScreen(navController: NavController)
                 )
             ){
                 Text(text = "Join N-Bay",
-                color = Color.White)
+                    color = Color.White)
             }
 
 

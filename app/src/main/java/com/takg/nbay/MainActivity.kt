@@ -151,7 +151,7 @@ fun SocialLogin(modifier: Modifier = Modifier){
                 Text(
                     "Login with Facebook",
                     color = Color.LightGray,
-                    modifier = Modifier.padding(start = 10.dp)
+                    modifier = Modifier.padding(start = 15.dp)
                 )
             
         }
