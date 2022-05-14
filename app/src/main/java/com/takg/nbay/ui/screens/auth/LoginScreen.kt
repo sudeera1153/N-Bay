@@ -53,13 +53,17 @@ fun LoginScreen(navController: NavController){
             Text(text = "Login",
             style = MaterialTheme.typography.h5,
             fontWeight = FontWeight.Bold,
-                modifier = Modifier.align(Alignment.Start)
+                modifier = Modifier.align(Alignment.Start).padding(vertical = 15.dp)
             )
+            SocialLogin()
+            Text(text = "Or Login with Email",
+                color=Color.LightGray,
+                style = MaterialTheme.typography.caption,
+            modifier = Modifier.padding(vertical = 15.dp))
             PrimaryTextField(
                 value = email,
                 modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(top = 16.dp),
+                    .fillMaxWidth(),
                 keyboardOptions = KeyboardOptions(
                     imeAction = ImeAction.Done,
                     keyboardType = KeyboardType.Email
@@ -92,30 +96,25 @@ fun LoginScreen(navController: NavController){
                         val icon = if(passwordvisibility) Icons.Outlined.Visibility else Icons.Outlined.VisibilityOff
                         Icon(icon, contentDescription = "Visibility Password")
                     }
-                               },
+                },
                 onValueChange = {password=it},
                 visualTransformation = PasswordVisualTransformation()
 
             )
 
-            
+
             Button(onClick = {},
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(top = 45.dp)
-                .clip(RoundedCornerShape(15.dp)),
-            contentPadding = PaddingValues(vertical = 15.dp),
-            colors = ButtonDefaults.buttonColors(
-                backgroundColor = Color(0xff0aa1dd),
-            )) {
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(top = 45.dp)
+                    .clip(RoundedCornerShape(15.dp)),
+                contentPadding = PaddingValues(vertical = 15.dp),
+                colors = ButtonDefaults.buttonColors(
+                    backgroundColor = Color(0xff0aa1dd),
+                )) {
                 Text(text = "Login",
-                color = Color.White)
+                    color = Color.White)
             }
-            Text(text = "Or",
-                color=Color.LightGray,
-                style = MaterialTheme.typography.caption,
-            modifier = Modifier.padding(vertical = 15.dp))
-            SocialLogin()
             Row {
                 Text(text = "New to N-Bay?",
                 color = Color.LightGray,
