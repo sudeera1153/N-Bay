@@ -1,12 +1,9 @@
 package com.takg.nbay.ui.screens.auth
 
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.clickable
+import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
@@ -38,6 +35,7 @@ fun SignUpScreen(navController: NavController)
     var email by remember{ mutableStateOf("")}
     var password by remember{ mutableStateOf("")}
     var passwordvisibility by remember{ mutableStateOf(false)}
+    var checkboxstate by remember{ mutableStateOf(false)}
     Scaffold(
         topBar = {
             TopAppBar(
@@ -131,6 +129,15 @@ fun SignUpScreen(navController: NavController)
                 visualTransformation = if(passwordvisibility) VisualTransformation.None else PasswordVisualTransformation(),
                 onValueChange = {password=it},
             )
+            
+            Box(modifier = Modifier
+                .align(Alignment.Start)
+                .fillMaxSize()
+                /*.background(if (checkboxstate) Color.Black else Color.Blue)*/) {
+                    Checkbox(checked = checkboxstate, onCheckedChange = {checkboxstate=it})
+                Text(text = "I have agree to the privacy policy", modifier = Modifier.align(Alignment.Center,),
+                color = Color.LightGray)
+                }
             Button(onClick = {
                 navController.navigate("login_screen")
             },
