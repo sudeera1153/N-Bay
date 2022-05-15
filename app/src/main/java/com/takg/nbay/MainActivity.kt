@@ -18,22 +18,21 @@ import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.compose.rememberNavController
-import com.takg.nbay.components.drawer
-import com.takg.nbay.components.searchbar
+import com.takg.nbay.ui.components.drawer
+import com.takg.nbay.ui.components.searchbar
 import com.takg.nbay.ui.navigation.SetupNavGraph
-import com.takg.nbay.ui.screens.home.HomeContent
 import com.takg.nbay.ui.theme.NBayTheme
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
             NBayTheme {
-                // A surface container using the 'background' color from the theme
                 Surface(color = MaterialTheme.colors.background) {
                     val navController = rememberNavController()
                     SetupNavGraph(navController = navController)
-
                 }
             }
         }
@@ -117,9 +116,9 @@ fun SocialLogin(modifier: Modifier = Modifier){
                     color = Color.LightGray,
                     modifier = Modifier.padding(start = 15.dp)
                 )
-            
+
         }
-        
+
     }
 }
 

@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">N-Bay</string>
     <string name="title_activity_home">HomeActivity</string>
+    <string name="google_client_id">885904249410-qca87jdat2s2m4pk2dk9r8kf2vu7eih9.apps.googleusercontent.com</string>
 </resources>
