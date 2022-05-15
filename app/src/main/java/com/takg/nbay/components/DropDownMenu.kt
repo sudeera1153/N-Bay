@@ -26,7 +26,7 @@ import androidx.compose.ui.unit.toSize
 fun CategoryDropDown() {
 
     var expanded by remember { mutableStateOf(false) }
-    val categorysuggestions = listOf("Apparel", "Electronics", "Jobs & Recruitments", "Acomodation","Educational","More")
+    val categorysuggestions = listOf("Apparel", "Electronics", "Jobs & Recruitments", "Accommodations","Educational","More")
 
     var selectedText by remember { mutableStateOf("") }
 

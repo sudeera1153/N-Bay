@@ -9,10 +9,10 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.*
+import androidx.compose.material.ButtonDefaults.elevation
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
-import androidx.compose.material.icons.outlined.Email
-import androidx.compose.material.icons.outlined.Person
+import androidx.compose.material.icons.outlined.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -77,7 +77,8 @@ fun CreateListing(navHost: NavController){
                 onClick = {},
                 modifier = Modifier.width(190.dp),
                 contentPadding = PaddingValues(vertical = 15.dp),
-                shape = RoundedCornerShape(15.dp)
+                shape = RoundedCornerShape(15.dp),
+                elevation = elevation(10.dp)
             ) {
                 /*Image(painter = painterResource(id = R.drawable.socialbutton_google),
                     contentDescription = "GoogleLogo",
@@ -85,7 +86,7 @@ fun CreateListing(navHost: NavController){
                 Text(
                     "Upload Item Pictures",
                     color = Color.LightGray,
-                    modifier = Modifier.padding(start = 10.dp)
+                    modifier = Modifier.padding(start = 10.dp),
                 )}
             PrimaryTextField(
                 value = item_title,
@@ -101,14 +102,15 @@ fun CreateListing(navHost: NavController){
                 label = {
                     Text(text = "Email", color = Color.LightGray)
                 },
-                leadingIcon = { Icon(Icons.Outlined.Email, contentDescription = "Email Icon") },
+                leadingIcon = { Icon(Icons.Outlined.Title, contentDescription = "Email Icon") },
                 onValueChange = { item_title = it },
             )
             PrimaryTextField(
                 value = item_desc,
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(top = 16.dp),
+                    .padding(top = 16.dp, bottom = 16.dp)
+                    .height(80.dp),
                 keyboardOptions = KeyboardOptions(
                     imeAction = ImeAction.Done,
                     keyboardType = KeyboardType.Email
@@ -116,9 +118,9 @@ fun CreateListing(navHost: NavController){
                 singleLine = true,
                 maxLines = 1,
                 label = {
-                    Text(text = "Description", color = Color.LightGray)
+                    Text(text = "Description", color = Color.LightGray, modifier = Modifier.align(Alignment.CenterHorizontally))
                 },
-                leadingIcon = {Icon(Icons.Outlined.Person, contentDescription = "Username Icon") },
+                leadingIcon = {Icon(Icons.Outlined.Feed, contentDescription = "Username Icon", modifier = Modifier.align(Alignment.CenterHorizontally)) },
                 onValueChange = {item_desc=it},
             )
             CategoryDropDown()
@@ -137,7 +139,7 @@ fun CreateListing(navHost: NavController){
                 label = {
                     Text(text = "Price", color = Color.LightGray)
                 },
-                leadingIcon = { Icon(Icons.Outlined.Email, contentDescription = "Email Icon") },
+                leadingIcon = { Icon(Icons.Outlined.AttachMoney, contentDescription = "Email Icon") },
                 onValueChange = { item_price = it },)
 
                 Button(onClick = {},
