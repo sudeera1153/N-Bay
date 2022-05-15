@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "885904249410",
+    "project_id": "n-bay-dc225",
+    "storage_bucket": "n-bay-dc225.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:885904249410:android:b2ad8b77a3fd32487c53db",
+        "android_client_info": {
+          "package_name": "com.takg.nbay"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "885904249410-va8ql3jka9b1javu7qun6hah4ofqbktc.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.takg.nbay",
+            "certificate_hash": "f67a29a740e59cd15212680b36aec59b7cd53c9e"
+          }
+        },
+        {
+          "client_id": "885904249410-qca87jdat2s2m4pk2dk9r8kf2vu7eih9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDzbnsXSCoR16wyjJ1MksquGlaEfKDBMfY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "885904249410-qca87jdat2s2m4pk2dk9r8kf2vu7eih9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
