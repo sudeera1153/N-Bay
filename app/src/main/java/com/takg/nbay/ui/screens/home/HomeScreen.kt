@@ -6,12 +6,12 @@ import androidx.compose.ui.tooling.preview.Preview
 
 
 @Composable
-fun HomeScreen(){
+fun HomeScreen() {
     Text(text = "nbay")
 }
 
 @Preview(showBackground = true)
 @Composable
 fun DefaultPreview() {
-    HomeScreen() 
+    HomeScreen()
 }
