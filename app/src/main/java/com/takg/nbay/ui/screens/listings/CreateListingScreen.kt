@@ -25,18 +25,16 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import androidx.navigation.NavHost
 import androidx.navigation.compose.rememberNavController
-import com.takg.nbay.PrimaryTextField
 import com.takg.nbay.R
-import com.takg.nbay.ui.screens.auth.SignUpScreen
+import com.takg.nbay.ui.components.PrimaryTextField
 import com.takg.nbay.ui.theme.NBayTheme
 
 @Composable
-fun CreateListing(navHost: NavController){
-    var item_title by remember{ mutableStateOf("") }
-    var item_desc by remember{ mutableStateOf("") }
-    var item_price by remember{ mutableStateOf("") }
+fun CreateListing(navHost: NavController) {
+    var item_title by remember { mutableStateOf("") }
+    var item_desc by remember { mutableStateOf("") }
+    var item_price by remember { mutableStateOf("") }
 
     Scaffold(
         topBar = {
@@ -62,12 +60,15 @@ fun CreateListing(navHost: NavController){
                 .verticalScroll(rememberScrollState()),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Text(text = "Create a Listing",
+            Text(
+                text = "Create a Listing",
                 style = MaterialTheme.typography.h4,
                 fontWeight = FontWeight.Bold,
                 modifier = Modifier.align(Alignment.Start)
             )
-            Image(painter = painterResource(id = R.drawable.signupbg), contentDescription ="Signup BG",
+            Image(
+                painter = painterResource(id = R.drawable.signupbg),
+                contentDescription = "Signup BG",
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(150.dp)
@@ -87,7 +88,8 @@ fun CreateListing(navHost: NavController){
                     "Upload Item Pictures",
                     color = Color.LightGray,
                     modifier = Modifier.padding(start = 10.dp),
-                )}
+                )
+            }
             PrimaryTextField(
                 value = item_title,
                 modifier = Modifier
@@ -118,10 +120,20 @@ fun CreateListing(navHost: NavController){
                 singleLine = true,
                 maxLines = 1,
                 label = {
-                    Text(text = "Description", color = Color.LightGray, modifier = Modifier.align(Alignment.CenterHorizontally))
+                    Text(
+                        text = "Description",
+                        color = Color.LightGray,
+                        modifier = Modifier.align(Alignment.CenterHorizontally)
+                    )
                 },
-                leadingIcon = {Icon(Icons.Outlined.Feed, contentDescription = "Username Icon", modifier = Modifier.align(Alignment.CenterHorizontally)) },
-                onValueChange = {item_desc=it},
+                leadingIcon = {
+                    Icon(
+                        Icons.Outlined.Feed,
+                        contentDescription = "Username Icon",
+                        modifier = Modifier.align(Alignment.CenterHorizontally)
+                    )
+                },
+                onValueChange = { item_desc = it },
             )
             CategoryDropDown()
             ConditionDropDown()
@@ -139,26 +151,35 @@ fun CreateListing(navHost: NavController){
                 label = {
                     Text(text = "Price", color = Color.LightGray)
                 },
-                leadingIcon = { Icon(Icons.Outlined.AttachMoney, contentDescription = "Email Icon") },
-                onValueChange = { item_price = it },)
+                leadingIcon = {
+                    Icon(
+                        Icons.Outlined.AttachMoney,
+                        contentDescription = "Email Icon"
+                    )
+                },
+                onValueChange = { item_price = it },
+            )
 
-                Button(onClick = {},
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(top = 45.dp)
-                        .clip(RoundedCornerShape(15.dp)),
-                    contentPadding = PaddingValues(vertical = 15.dp),
-                    colors = ButtonDefaults.buttonColors(
-                        backgroundColor = Color(0xff0aa1dd),
-                    )) {
-                    Text(text = "Place Item",
-                        color = Color.White)
+            Button(
+                onClick = {},
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(top = 45.dp)
+                    .clip(RoundedCornerShape(15.dp)),
+                contentPadding = PaddingValues(vertical = 15.dp),
+                colors = ButtonDefaults.buttonColors(
+                    backgroundColor = Color(0xff0aa1dd),
+                )
+            ) {
+                Text(
+                    text = "Place Item",
+                    color = Color.White
+                )
 
-                }
+            }
         }
     }
 }
-
 
 
 @Preview(showBackground = true)

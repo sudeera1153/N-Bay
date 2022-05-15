@@ -1,4 +1,4 @@
-package com.takg.nbay.ui.screens.auth
+package com.takg.nbay.ui.screens.auth.login
 
 import android.widget.Toast
 import androidx.compose.foundation.Image
