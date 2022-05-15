@@ -2,13 +2,12 @@ package com.takg.nbay.ui.screens.home
 
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.material.Scaffold
-import androidx.compose.material.Text
 import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.tooling.preview.Preview
-import com.takg.nbay.components.drawer
-import com.takg.nbay.components.searchbar
+import com.takg.nbay.ui.components.drawer
+import com.takg.nbay.ui.components.searchbar
 
 
 @Composable

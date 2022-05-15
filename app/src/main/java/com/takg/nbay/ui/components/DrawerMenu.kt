@@ -1,4 +1,4 @@
-package com.takg.nbay.components
+package com.takg.nbay.ui.components
 
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*

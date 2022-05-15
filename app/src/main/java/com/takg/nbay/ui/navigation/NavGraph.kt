@@ -1,12 +1,12 @@
 package com.takg.nbay.ui.navigation
 
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import com.takg.nbay.ui.screens.auth.AuthScreen
+import com.takg.nbay.ui.screens.auth.login.LoginScreen
+import com.takg.nbay.ui.screens.auth.signup.SignUpScreen
 import com.takg.nbay.ui.screens.home.HomeScreen
 import com.takg.nbay.ui.screens.welcome.AnimatedSplashScreen
 
@@ -19,8 +19,17 @@ fun SetupNavGraph(navController: NavHostController) {
         composable(route = Screen.Splash.route) {
             AnimatedSplashScreen() {
                 navController.popBackStack()
-                navController.navigate(Screen.Home.route)
+                navController.navigate(Screen.Auth.route)
             }
+        }
+        composable(route = Screen.Auth.route) {
+            AuthScreen(navController = navController)
+        }
+        composable(route = Screen.Login.route) {
+            LoginScreen(navController = navController)
+        }
+        composable(route = Screen.SignUp.route) {
+            SignUpScreen(navController = navController)
         }
         composable(route = Screen.Home.route) {
             HomeScreen()
