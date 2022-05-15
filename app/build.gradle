@@ -3,6 +3,7 @@ plugins {
     id 'kotlin-android'
     id "kotlin-kapt"
     id "com.google.gms.google-services"
+    id 'dagger.hilt.android.plugin'
 }
 
 android {
@@ -76,4 +77,9 @@ dependencies {
     //Play Services
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.6.0"
     implementation "com.google.android.gms:play-services-auth:20.2.0"
+
+    //Dagger - Hilt
+    implementation 'com.google.dagger:hilt-android:2.41'
+    kapt 'com.google.dagger:hilt-android-compiler:2.41'
+    implementation 'androidx.hilt:hilt-navigation-compose:1.0.0'
 }
