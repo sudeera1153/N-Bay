@@ -24,7 +24,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
-import com.takg.nbay.Nbay
 import com.takg.nbay.PrimaryTextField
 import com.takg.nbay.R
 import com.takg.nbay.SocialLogin
@@ -103,7 +102,7 @@ fun LoginScreen(navController: NavController){
             )
 
 
-            Button(onClick = {},
+            Button(onClick = {navController.navigate("main_screen")},
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(top = 45.dp)

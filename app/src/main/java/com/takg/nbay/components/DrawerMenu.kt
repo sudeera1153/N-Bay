@@ -5,7 +5,6 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.Divider
-import androidx.compose.material.SnackbarDefaults.backgroundColor
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -14,7 +13,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.takg.nbay.DrawerData
+import com.takg.nbay.data.DrawerData
 import com.takg.nbay.ui.theme.NBayTheme
 import com.takg.nbay.ui.theme.Nsbmblue
 
@@ -71,7 +70,7 @@ fun drawer(scrollState: ScrollState){
 }
 
 @Composable
-fun DrawerItem(item:DrawerData){
+fun DrawerItem(item: DrawerData){
     Row(modifier = Modifier
         .fillMaxWidth()
         .height(50.dp)
@@ -85,7 +84,7 @@ fun DrawerItem(item:DrawerData){
 
 @Preview
 @Composable
-fun drawerprew(){
+fun drawerprewiw(){
     NBayTheme {
 
 

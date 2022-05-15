@@ -18,9 +18,10 @@ import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.compose.rememberNavController
-import com.takg.nbay.ui.components.drawer
-import com.takg.nbay.ui.components.searchbar
+import com.takg.nbay.components.drawer
+import com.takg.nbay.components.searchbar
 import com.takg.nbay.ui.navigation.SetupNavGraph
+import com.takg.nbay.ui.screens.home.HomeContent
 import com.takg.nbay.ui.theme.NBayTheme
 
 class MainActivity : ComponentActivity() {
@@ -28,37 +29,14 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             NBayTheme {
+                // A surface container using the 'background' color from the theme
                 Surface(color = MaterialTheme.colors.background) {
                     val navController = rememberNavController()
                     SetupNavGraph(navController = navController)
+
                 }
             }
         }
-    }
-}
-
-@Composable
-fun Nbay() {
-
-    val scaffoldState = rememberScaffoldState()
-    val coroutineScope = rememberCoroutineScope()
-    val scrollState = rememberScrollState()
-
-    Scaffold(scaffoldState = scaffoldState,
-        topBar = { searchbar(scaffoldState, coroutineScope) },
-        drawerContent = {
-            drawer(scrollState)
-        }) {
-
-    }
-}
-
-
-@Preview(showBackground = true)
-@Composable
-fun DefaultPreview() {
-    NBayTheme {
-        Nbay()
     }
 }
 
@@ -67,6 +45,8 @@ fun PrimaryTextField(
     value: String,
     onValueChange: (String) -> Unit,
     modifier: Modifier = Modifier,
+    enabled: Boolean = true,
+    readOnly: Boolean = false,
     label: @Composable (() -> Unit)? = null,
     leadingIcon: @Composable (() -> Unit)? = null,
     trailingIcon: @Composable (() -> Unit)? = null,
@@ -76,7 +56,7 @@ fun PrimaryTextField(
     keyboardActions: KeyboardActions = KeyboardActions(),
     singleLine: Boolean = false,
     maxLines: Int = Int.MAX_VALUE,
-) {
+){
     val focusManager = LocalFocusManager.current
     TextField(
         value = value,
@@ -105,7 +85,7 @@ fun PrimaryTextField(
 }
 
 @Composable
-fun SocialLogin(modifier: Modifier = Modifier) {
+fun SocialLogin(modifier: Modifier = Modifier){
     Column(modifier = modifier) {
         OutlinedButton(
             onClick = {},
@@ -120,32 +100,31 @@ fun SocialLogin(modifier: Modifier = Modifier) {
                 "Login with Google",
                 color = Color.LightGray,
                 modifier = Modifier.padding(start = 10.dp)
-            )
-        }
+            )}
         Spacer(modifier = Modifier.padding(vertical = 5.dp))
 
-        OutlinedButton(
-            onClick = {},
-            modifier = Modifier.fillMaxWidth(),
-            contentPadding = PaddingValues(vertical = 15.dp),
-            shape = RoundedCornerShape(15.dp)
-        ) {
-            /*Image(painter = painterResource(id = R.drawable.socialbutton_fb),
-                contentDescription = "FBLogo",
-                modifier = Modifier.padding(24.dp))*/
-            Text(
-                "Login with Facebook",
-                color = Color.LightGray,
-                modifier = Modifier.padding(start = 15.dp)
-            )
-
+            OutlinedButton(
+                onClick = {},
+                modifier = Modifier.fillMaxWidth(),
+                contentPadding = PaddingValues(vertical = 15.dp),
+                shape = RoundedCornerShape(15.dp)
+            ) {
+                /*Image(painter = painterResource(id = R.drawable.socialbutton_fb),
+                    contentDescription = "FBLogo",
+                    modifier = Modifier.padding(24.dp))*/
+                Text(
+                    "Login with Facebook",
+                    color = Color.LightGray,
+                    modifier = Modifier.padding(start = 15.dp)
+                )
+            
         }
-
+        
     }
 }
 
 @Composable
-fun SocialSignUp(modifier: Modifier = Modifier) {
+fun SocialSignUp(modifier: Modifier = Modifier){
     Column(modifier = modifier) {
         OutlinedButton(
             onClick = {},
@@ -160,8 +139,7 @@ fun SocialSignUp(modifier: Modifier = Modifier) {
                 "Sign-up with Google",
                 color = Color.LightGray,
                 modifier = Modifier.padding(start = 10.dp)
-            )
-        }
+            )}
         Spacer(modifier = Modifier.padding(vertical = 5.dp))
 
         OutlinedButton(
@@ -170,9 +148,9 @@ fun SocialSignUp(modifier: Modifier = Modifier) {
             contentPadding = PaddingValues(vertical = 15.dp),
             shape = RoundedCornerShape(15.dp)
         ) {
-            /*Image(painter = painterResource(id = R.drawable.nbay_cropped),
-                contentDescription = "FBLogo",
-                modifier = Modifier.padding(24.dp))*/
+             /*Image(painter = painterResource(id = R.drawable.nbay_cropped),
+                 contentDescription = "FBLogo",
+                 modifier = Modifier.padding(24.dp))*/
             Text(
                 "Sign-up with Facebook",
                 color = Color.LightGray,

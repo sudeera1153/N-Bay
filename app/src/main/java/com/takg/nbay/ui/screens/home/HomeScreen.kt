@@ -1,13 +1,30 @@
 package com.takg.nbay.ui.screens.home
 
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
+import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.tooling.preview.Preview
+import com.takg.nbay.components.drawer
+import com.takg.nbay.components.searchbar
 
 
 @Composable
 fun HomeScreen() {
-    Text(text = "nbay")
+    val scaffoldState = rememberScaffoldState()
+    val coroutineScope = rememberCoroutineScope()
+    val scrollState = rememberScrollState()
+
+    Scaffold(scaffoldState = scaffoldState,
+        topBar = { searchbar(scaffoldState, coroutineScope) },
+        drawerContent = {
+            drawer(scrollState)
+        }) {
+        HomeContent()
+
+    }
 }
 
 @Preview(showBackground = true)

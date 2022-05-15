@@ -1,4 +1,4 @@
-package com.takg.nbay
+package com.takg.nbay.data
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.*
