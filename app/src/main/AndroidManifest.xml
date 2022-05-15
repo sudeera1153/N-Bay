@@ -10,11 +10,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.NBay">
         <activity
-            android:name=".ui.screens.home.HomeActivity"
-            android:exported="true"
-            android:label="@string/title_activity_home"
-            android:theme="@style/Theme.NBay.NoActionBar" />
-        <activity
             android:name=".MainActivity"
             android:exported="true"
             android:label="@string/app_name"
