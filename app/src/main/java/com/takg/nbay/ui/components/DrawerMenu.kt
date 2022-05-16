@@ -20,7 +20,7 @@ import com.takg.nbay.ui.theme.NBayTheme
 import com.takg.nbay.ui.theme.Nsbmblue
 
 @Composable
-fun Drawer(scrollState: ScrollState,navController: NavController){
+fun Drawer(scrollState: ScrollState, navController: NavController) {
 
     val MenuList = listOf(
         DrawerData.Home,
@@ -40,27 +40,34 @@ fun Drawer(scrollState: ScrollState,navController: NavController){
         DrawerData.LogOut
     )
 
-    Column (Modifier.verticalScroll(scrollState)){
-        Text(text = "N-Bay",
+    Column(Modifier.verticalScroll(scrollState)) {
+        Text(
+            text = "N-Bay",
             color = Nsbmblue,
-            modifier = Modifier.padding(start = 20.dp,top = 20.dp),
+            modifier = Modifier.padding(start = 20.dp, top = 20.dp),
             fontSize = 20.sp,
             fontWeight = FontWeight.Bold
         )
-        MenuList.forEach{
-            item ->
-            when{
-                item.isDivider ->{
-                    Divider(modifier = Modifier.padding(bottom = 20.dp,top = 20.dp))
+        MenuList.forEach { item ->
+            when {
+                item.isDivider -> {
+                    Divider(modifier = Modifier.padding(bottom = 20.dp, top = 20.dp))
                 }
-                item.isHeader ->{
-                    Text(text = item.title!!,
-                    fontWeight = FontWeight.Light,
-                    modifier = Modifier.padding(start = 20.dp,bottom = 20.dp,top = 20.dp))
+                item.isHeader -> {
+                    Text(
+                        text = item.title!!,
+                        fontWeight = FontWeight.Light,
+                        modifier = Modifier.padding(start = 20.dp, bottom = 20.dp, top = 20.dp)
+                    )
                 }
-                else ->{
-                    Button(onClick = { navController.navigate(Screen.UserProfile.route) },colors = ButtonDefaults.buttonColors(
-                        backgroundColor = Color.White),elevation = null) {
+                else -> {
+                    Button(
+                        onClick = { navController.navigate(Screen.UserProfile.route) },
+                        colors = ButtonDefaults.buttonColors(
+                            backgroundColor = Color.White
+                        ),
+                        elevation = null
+                    ) {
                         DrawerItem(item = item)
                     }
                 }
@@ -72,12 +79,15 @@ fun Drawer(scrollState: ScrollState,navController: NavController){
 }
 
 @Composable
-fun DrawerItem(item: DrawerData){
-    Row(modifier = Modifier
-        .fillMaxWidth()
-        .height(50.dp)
-        .padding(top = 16.dp)) {
-        Image(imageVector = item.icon!!, contentDescription = item.title!!,
+fun DrawerItem(item: DrawerData) {
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(50.dp)
+            .padding(top = 16.dp)
+    ) {
+        Image(
+            imageVector = item.icon!!, contentDescription = item.title!!,
             modifier = Modifier.weight(0.5f)
         )
         Text(text = item.title, modifier = Modifier.weight(2.0f))
@@ -86,7 +96,7 @@ fun DrawerItem(item: DrawerData){
 
 @Preview
 @Composable
-fun drawerprewiw(){
+fun DrawerPreview() {
     NBayTheme {
 
 
