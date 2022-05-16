@@ -75,11 +75,17 @@ dependencies {
     implementation "com.google.firebase:firebase-firestore-ktx"
 
     //Play Services
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.6.0"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.6.1"
     implementation "com.google.android.gms:play-services-auth:20.2.0"
 
     //Dagger - Hilt
     implementation 'com.google.dagger:hilt-android:2.41'
     kapt 'com.google.dagger:hilt-android-compiler:2.41'
     implementation 'androidx.hilt:hilt-navigation-compose:1.0.0'
+
+    //Coil
+    implementation "io.coil-kt:coil-compose:2.0.0"
+
+    //Placeholder
+    implementation "com.google.accompanist:accompanist-placeholder-material:0.14.0"
 }
