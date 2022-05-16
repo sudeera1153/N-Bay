@@ -31,7 +31,6 @@ import com.takg.nbay.common.Resource
 import com.takg.nbay.ui.components.PrimaryTextField
 import com.takg.nbay.ui.navigation.Screen
 import com.takg.nbay.ui.theme.NBayTheme
-import kotlinx.coroutines.flow.collect
 
 @Composable
 fun SignUpScreen(navController: NavController, viewModel: SignUpViewModel = hiltViewModel()) {

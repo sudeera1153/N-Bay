@@ -11,7 +11,6 @@ import com.takg.nbay.common.ValidationResult
 import com.takg.nbay.domain.use_case.CreateUser
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject

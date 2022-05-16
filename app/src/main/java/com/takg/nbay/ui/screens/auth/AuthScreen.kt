@@ -34,103 +34,6 @@ fun AuthScreen(
     navController: NavController,
     viewModel: AuthViewModel = hiltViewModel()
 ) {
-    if (viewModel.isUserAuthenticated) {
-        navController.navigate(Screen.Home.route)
-    }
-
-    val launcher =
-        rememberLauncherForActivityResult(StartIntentSenderForResult()) { result ->
-            if (result.resultCode == RESULT_OK) {
-                try {
-                    val credentials =
-                        viewModel.oneTapClient.getSignInCredentialFromIntent(result.data)
-                    val googleIdToken = credentials.googleIdToken
-                    val googleCredentials = getCredential(googleIdToken, null)
-                    viewModel.signInWithGoogle(googleCredentials)
-                } catch (e: ApiException) {
-                    print(e)
-                }
-            }
-        }
-
-    fun launch(signInResult: BeginSignInResult) {
-        val intent = IntentSenderRequest.Builder(signInResult.pendingIntent.intentSender).build()
-        launcher.launch(intent)
-    }
-
-    when (val oneTapSignInResponse = viewModel.oneTapSignInState.value) {
-        is Loading -> print("loading SignIn")
-        is Success -> {
-            oneTapSignInResponse.data?.let {
-                LaunchedEffect(it) {
-                    launch(it)
-                }
-            }
-        }
-        is Error -> {
-            oneTapSignInResponse.data?.let {
-                LaunchedEffect(it) {
-                    print(it)
-                    viewModel.oneTapSignUp()
-                }
-            }
-        }
-    }
-
-    when (val oneTapSignUpResponse = viewModel.oneTapSignUpState.value) {
-        is Loading -> print("loading SignUp")
-        is Success -> {
-            oneTapSignUpResponse.data?.let {
-                LaunchedEffect(it) {
-                    launch(it)
-                }
-            }
-        }
-        is Error -> oneTapSignUpResponse.data?.let {
-            LaunchedEffect(Unit) {
-                print(it)
-            }
-        }
-    }
-
-    when (val signInResponse = viewModel.signInState.value) {
-        is Loading -> print("loading")
-        is Success -> {
-            signInResponse.data?.let { isNewUser ->
-                if (isNewUser) {
-                    LaunchedEffect(isNewUser) {
-                        viewModel.createUser()
-                    }
-                } else {
-                    print("Navigate to Profile")
-                }
-            }
-        }
-        is Error -> signInResponse.data?.let {
-            LaunchedEffect(Unit) {
-                print(it)
-            }
-        }
-    }
-
-    when (val createUserResponse = viewModel.createUserState.value) {
-        is Loading -> print("loading userCreated")
-        is Success -> {
-            createUserResponse.data?.let { isUserCreated ->
-                if (isUserCreated) {
-                    print("Navigate to Profile: freshUser")
-                }
-            }
-        }
-        is Error -> createUserResponse.data?.let {
-            LaunchedEffect(Unit) {
-                print(it)
-            }
-        }
-    }
-
-
-
     Scaffold {
         Column(
             modifier = Modifier
@@ -142,7 +45,7 @@ fun AuthScreen(
         ) {
 
             SocialButton(provider = "Google") {
-                viewModel.oneTapSignIn()
+
             }
 
             Spacer(modifier = Modifier.padding(vertical = 5.dp))

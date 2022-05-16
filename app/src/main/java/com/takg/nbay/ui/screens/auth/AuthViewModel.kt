@@ -16,54 +16,7 @@ import kotlinx.coroutines.launch
 
 @HiltViewModel
 class AuthViewModel @Inject constructor(
-    private val repo: AuthRepository,
-    val oneTapClient: SignInClient
+    private val repo: AuthRepository
 ) : ViewModel() {
     val isUserAuthenticated get() = repo.isUserAuthenticatedInFirebase()
-
-
-
-    private val _oneTapSignInState = mutableStateOf<Resource<BeginSignInResult>>(Loading())
-    val oneTapSignInState: State<Resource<BeginSignInResult>> = _oneTapSignInState
-
-    private val _oneTapSignUpState = mutableStateOf<Resource<BeginSignInResult>>(Loading())
-    val oneTapSignUpState: State<Resource<BeginSignInResult>> = _oneTapSignUpState
-
-    private val _signInState = mutableStateOf<Resource<Boolean>>(Loading())
-    val signInState: State<Resource<Boolean>> = _signInState
-
-    private val _createUserState = mutableStateOf<Resource<Boolean>>(Loading())
-    val createUserState: State<Resource<Boolean>> = _createUserState
-
-    fun oneTapSignIn() {
-        viewModelScope.launch {
-            repo.oneTapSignInWithGoogle().collect { response ->
-                _oneTapSignInState.value = response
-            }
-        }
-    }
-
-    fun oneTapSignUp() {
-        viewModelScope.launch {
-            repo.oneTapSignUpWithGoogle().collect { response ->
-                _oneTapSignUpState.value = response
-            }
-        }
-    }
-
-    fun signInWithGoogle(googleCredential: AuthCredential) {
-        viewModelScope.launch {
-            repo.firebaseSignInWithGoogle(googleCredential).collect { response ->
-                _signInState.value = response
-            }
-        }
-    }
-
-    fun createUser() {
-        viewModelScope.launch {
-            repo.createUserInFirestore().collect { response ->
-                _createUserState.value = response
-            }
-        }
-    }
 }
