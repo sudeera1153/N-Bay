@@ -14,7 +14,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import com.takg.nbay.data.DrawerData
 import com.takg.nbay.ui.navigation.Screen
 import com.takg.nbay.ui.theme.NBayTheme
 import com.takg.nbay.ui.theme.Nsbmblue
@@ -22,7 +21,7 @@ import com.takg.nbay.ui.theme.Nsbmblue
 @Composable
 fun Drawer(scrollState: ScrollState, navController: NavController) {
 
-    val MenuList = listOf(
+    val menuList = listOf(
         DrawerData.Home,
         DrawerData.Divider,
         DrawerData.HdrMyAccount,
@@ -48,7 +47,7 @@ fun Drawer(scrollState: ScrollState, navController: NavController) {
             fontSize = 20.sp,
             fontWeight = FontWeight.Bold
         )
-        MenuList.forEach { item ->
+        menuList.forEach { item ->
             when {
                 item.isDivider -> {
                     Divider(modifier = Modifier.padding(bottom = 20.dp, top = 20.dp))
@@ -62,7 +61,7 @@ fun Drawer(scrollState: ScrollState, navController: NavController) {
                 }
                 else -> {
                     Button(
-                        onClick = { navController.navigate(Screen.UserProfile.route) },
+                        onClick = { navController.navigate(Screen.AddListing.route) },
                         colors = ButtonDefaults.buttonColors(
                             backgroundColor = Color.White
                         ),

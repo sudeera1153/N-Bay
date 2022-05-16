@@ -83,6 +83,12 @@ dependencies {
     kapt 'com.google.dagger:hilt-android-compiler:2.41'
     implementation 'androidx.hilt:hilt-navigation-compose:1.0.0'
 
+    //Coil
+    implementation "io.coil-kt:coil-compose:2.0.0"
+
+    //Placeholder
+    implementation "com.google.accompanist:accompanist-placeholder-material:0.14.0"
+
     //Accompanist
     implementation 'com.google.accompanist:accompanist-pager:0.21-0-beta'
     implementation 'com.google.accompanist:accompanist-pager-indicators:0.21.0-beta'

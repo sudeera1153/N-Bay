@@ -1,6 +1,5 @@
-package com.takg.nbay.ui.screens.userprofile
+package com.takg.nbay.ui.screens.user_profile
 
-import android.media.Image
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
@@ -16,7 +15,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.takg.nbay.ui.theme.NBayTheme

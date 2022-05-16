@@ -9,7 +9,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.takg.nbay.ui.components.Drawer
-import com.takg.nbay.ui.components.searchbar
+import com.takg.nbay.ui.components.SearchBar
+import com.takg.nbay.ui.screens.listings.index.ListingsScreenContent
 
 
 @Composable
@@ -18,13 +19,15 @@ fun HomeScreen(navController: NavController) {
     val coroutineScope = rememberCoroutineScope()
     val scrollState = rememberScrollState()
 
-    Scaffold(scaffoldState = scaffoldState,
-        topBar = { searchbar(scaffoldState, coroutineScope) },
+    Scaffold(
+        scaffoldState = scaffoldState,
+        topBar = { SearchBar(scaffoldState, coroutineScope) },
         drawerContent = {
-            Drawer(scrollState,navController)
-        }) {
-        HomeContent()
+            Drawer(scrollState, navController)
+        },
+    ) {
 
+        ListingsScreenContent()
     }
 }
 

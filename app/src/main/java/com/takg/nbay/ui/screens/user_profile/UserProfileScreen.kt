@@ -1,10 +1,8 @@
-package com.takg.nbay.ui.screens.userprofile
+package com.takg.nbay.ui.screens.user_profile
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.navigation.compose.rememberNavController
-import com.takg.nbay.ui.screens.auth.signup.SignUpScreen
 import com.takg.nbay.ui.theme.NBayTheme
 
 @Composable
