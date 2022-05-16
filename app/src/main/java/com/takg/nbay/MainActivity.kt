@@ -5,7 +5,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.material.*
 import androidx.navigation.compose.rememberNavController
-import com.takg.nbay.ui.navigation.SetupNavGraph
+import com.takg.nbay.ui.navigation.Navigation
 import com.takg.nbay.ui.theme.NBayTheme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -16,8 +16,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             NBayTheme {
                 Surface(color = MaterialTheme.colors.background) {
-                    val navController = rememberNavController()
-                    SetupNavGraph(navController = navController)
+                    Navigation()
                 }
             }
         }

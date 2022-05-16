@@ -1,12 +1,10 @@
 package com.takg.nbay.data.repository
 
-import com.google.android.gms.auth.api.identity.BeginSignInRequest
-import com.google.android.gms.auth.api.identity.SignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
-import com.google.firebase.auth.AuthCredential
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.firestore.CollectionReference
+import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.FieldValue.serverTimestamp
+import com.google.firebase.firestore.FirebaseFirestore
 import com.takg.nbay.common.Resource
 import com.takg.nbay.domain.repository.AuthRepository
 import kotlinx.coroutines.channels.awaitClose
@@ -20,13 +18,12 @@ import javax.inject.Singleton
 @Singleton
 class AuthRepositoryImpl @Inject constructor(
     private val auth: FirebaseAuth,
-    private var oneTapClient: SignInClient,
-    private var signInRequest: BeginSignInRequest,
-    private var signUpRequest: BeginSignInRequest,
-    private var signInClient: GoogleSignInClient,
-    private val usersRef: CollectionReference
+    store: FirebaseFirestore
 ) : AuthRepository {
+    private val usersRef = store.collection("users")
+
     override fun isUserAuthenticatedInFirebase() = auth.currentUser != null
+    override fun getCurrentUser(): FirebaseUser? = auth.currentUser
 
     override suspend fun signIn(email: String, password: String): Flow<Resource<Unit>> = flow {
         emit(Resource.Loading())
@@ -42,38 +39,6 @@ class AuthRepositoryImpl @Inject constructor(
             emit(Resource.Error(e.message.toString(), exception = e))
         }
     }
-
-    override suspend fun oneTapSignInWithGoogle() = flow {
-        try {
-            emit(Resource.Loading())
-            val result = oneTapClient.beginSignIn(signInRequest).await()
-            emit(Resource.Success(result))
-        } catch (e: Exception) {
-            emit(Resource.Error(e.message ?: e.javaClass.name, exception = e))
-        }
-    }
-
-    override suspend fun oneTapSignUpWithGoogle() = flow {
-        try {
-            emit(Resource.Loading())
-            val result = oneTapClient.beginSignIn(signUpRequest).await()
-            emit(Resource.Success(result))
-        } catch (e: Exception) {
-            emit(Resource.Error(e.message ?: e.javaClass.name, exception = e))
-        }
-    }
-
-    override suspend fun firebaseSignInWithGoogle(googleCredential: AuthCredential): Flow<Resource<Boolean>> =
-        flow {
-            try {
-                emit(Resource.Loading())
-                val authResult = auth.signInWithCredential(googleCredential).await()
-                val isNewUser = authResult.additionalUserInfo?.isNewUser
-                emit(Resource.Success(isNewUser ?: false))
-            } catch (e: Exception) {
-                emit(Resource.Error(e.message ?: e.javaClass.name, exception = e))
-            }
-        }
 
     override suspend fun createUserInFirestore(): Flow<Resource<Boolean>> = flow {
         try {
@@ -108,7 +73,6 @@ class AuthRepositoryImpl @Inject constructor(
         try {
             emit(Resource.Loading())
             auth.signOut()
-            oneTapClient.signOut().await()
             emit(Resource.Success(true))
         } catch (e: Exception) {
             emit(Resource.Error(e.message ?: e.javaClass.name))
@@ -121,8 +85,6 @@ class AuthRepositoryImpl @Inject constructor(
             auth.currentUser?.apply {
                 usersRef.document(uid).delete().await()
                 delete().await()
-                signInClient.revokeAccess().await()
-                oneTapClient.signOut().await()
             }
             emit(Resource.Success(true))
         } catch (e: Exception) {

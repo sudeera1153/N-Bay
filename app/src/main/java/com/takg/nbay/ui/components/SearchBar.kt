@@ -20,7 +20,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
 @Composable
-fun searchbar(scaffoldState: ScaffoldState, scope: CoroutineScope) {
+fun SearchBar(scaffoldState: ScaffoldState, scope: CoroutineScope) {
     Box(modifier = Modifier.padding(10.dp)) {
         Card(
             shape = RoundedCornerShape(10.dp),
@@ -63,7 +63,7 @@ fun DefaultPreview1() {
     NBayTheme {
         val scaffoldState = rememberScaffoldState()
         val coroutineScope = rememberCoroutineScope()
-        searchbar(scaffoldState, coroutineScope)
+        SearchBar(scaffoldState, coroutineScope)
 
     }
 }
