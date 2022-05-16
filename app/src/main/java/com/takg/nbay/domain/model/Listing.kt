@@ -9,11 +9,11 @@ enum class ListingStatus {
 }
 
 data class Listing(
-    var id: String,
-    var title: String,
-    var isExternal: Boolean,
+    var id: String? = null,
+    var title: String? = null,
+    var isExternal: Boolean? = null,
     var status: ListingStatus = ListingStatus.PENDING,
-    var price: Double,
+    var price: Double? = null,
     var desc: String? = null,
     var imageUrl: String? = null,
 

@@ -1,7 +1,6 @@
-package com.takg.nbay.ui.screens.listings
+package com.takg.nbay.ui.screens.listings.create
 
-import CategoryDropDown
-import ConditionDropDown
+import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
@@ -18,23 +17,46 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.takg.nbay.R
+import com.takg.nbay.common.Resource
+import com.takg.nbay.domain.model.ItemCategory
+import com.takg.nbay.domain.model.ItemCondition
+import com.takg.nbay.ui.components.OutLinedDropDown
 import com.takg.nbay.ui.components.PrimaryTextField
+import com.takg.nbay.ui.navigation.Screen
 import com.takg.nbay.ui.theme.NBayTheme
 
 @Composable
-fun CreateListing(navHost: NavController) {
-    var item_title by remember { mutableStateOf("") }
-    var item_desc by remember { mutableStateOf("") }
-    var item_price by remember { mutableStateOf("") }
+fun AddListingScreen(
+    navController: NavController,
+    viewModel: AddListingViewModel = hiltViewModel()
+) {
+    val state = viewModel.state
+    val context = LocalContext.current
+
+    LaunchedEffect(key1 = context) {
+        viewModel.addListingEvents.collect {
+            when (it) {
+                is Resource.Error -> {
+                    Toast.makeText(context, it.message, Toast.LENGTH_LONG).show()
+                }
+                is Resource.Loading -> print("Loading createUser")
+                is Resource.Success -> {
+                    navController.popBackStack()
+                    navController.navigate(Screen.Home.route)
+                }
+            }
+        }
+    }
 
     Scaffold(
         topBar = {
@@ -67,10 +89,11 @@ fun CreateListing(navHost: NavController) {
                 modifier = Modifier.align(Alignment.Start)
             )
             Image(
-                painter = painterResource(id = R.drawable.signupbg),
+                painter = painterResource(id = R.drawable.box_placeholder),
                 contentDescription = "Signup BG",
                 modifier = Modifier
                     .fillMaxWidth()
+                    .padding(vertical = 15.dp)
                     .height(150.dp)
                     .align(Alignment.CenterHorizontally)
             )
@@ -81,44 +104,35 @@ fun CreateListing(navHost: NavController) {
                 shape = RoundedCornerShape(15.dp),
                 elevation = elevation(10.dp)
             ) {
-                /*Image(painter = painterResource(id = R.drawable.socialbutton_google),
-                    contentDescription = "GoogleLogo",
-                    modifier = Modifier.padding(24.dp))*/
                 Text(
-                    "Upload Item Pictures",
+                    "Select Item Picture",
                     color = Color.LightGray,
                     modifier = Modifier.padding(start = 10.dp),
                 )
             }
             PrimaryTextField(
-                value = item_title,
+                value = state.title,
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(top = 25.dp),
-                keyboardOptions = KeyboardOptions(
-                    imeAction = ImeAction.Done,
-                    keyboardType = KeyboardType.Email
-                ),
                 singleLine = true,
                 maxLines = 1,
                 label = {
-                    Text(text = "Email", color = Color.LightGray)
+                    Text(text = "Title", color = Color.LightGray)
                 },
-                leadingIcon = { Icon(Icons.Outlined.Title, contentDescription = "Email Icon") },
-                onValueChange = { item_title = it },
+                leadingIcon = { Icon(Icons.Outlined.Title, contentDescription = "Title Icon") },
+                onValueChange = {
+                    viewModel.onEvent(AddListingFormEvent.TitleChanged(it))
+                },
             )
             PrimaryTextField(
-                value = item_desc,
+                value = state.description,
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(top = 16.dp, bottom = 16.dp)
                     .height(80.dp),
-                keyboardOptions = KeyboardOptions(
-                    imeAction = ImeAction.Done,
-                    keyboardType = KeyboardType.Email
-                ),
                 singleLine = true,
-                maxLines = 1,
+                maxLines = 20,
                 label = {
                     Text(
                         text = "Description",
@@ -129,23 +143,38 @@ fun CreateListing(navHost: NavController) {
                 leadingIcon = {
                     Icon(
                         Icons.Outlined.Feed,
-                        contentDescription = "Username Icon",
+                        contentDescription = "Feed Icon",
                         modifier = Modifier.align(Alignment.CenterHorizontally)
                     )
                 },
-                onValueChange = { item_desc = it },
+                onValueChange = { viewModel.onEvent(AddListingFormEvent.DescriptionChanged(it)) },
             )
-            CategoryDropDown()
-            ConditionDropDown()
+            OutLinedDropDown(
+                value = state.description,
+                labelText = "Select Category",
+                options = ItemCategory.values().associate {
+                    it.name to it.value
+                },
+                onSelect = {
+                    viewModel.onEvent(AddListingFormEvent.CategoryChanged(it))
+                }
+            )
+            OutLinedDropDown(
+                value = state.description,
+                labelText = "Item Condition",
+                options = ItemCondition.values().associate {
+                    it.name to it.value
+                },
+                onSelect = {
+                    viewModel.onEvent(AddListingFormEvent.ConditionChanged(it))
+                }
+            )
             PrimaryTextField(
-                value = item_price,
+                value = state.price,
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(top = 25.dp),
-                keyboardOptions = KeyboardOptions(
-                    imeAction = ImeAction.Done,
-                    keyboardType = KeyboardType.Number
-                ),
+                keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Number),
                 singleLine = true,
                 maxLines = 1,
                 label = {
@@ -154,14 +183,16 @@ fun CreateListing(navHost: NavController) {
                 leadingIcon = {
                     Icon(
                         Icons.Outlined.AttachMoney,
-                        contentDescription = "Email Icon"
+                        contentDescription = "Money Icon"
                     )
                 },
-                onValueChange = { item_price = it },
+                onValueChange = { viewModel.onEvent(AddListingFormEvent.PriceChanged(it)) },
             )
 
             Button(
-                onClick = {},
+                onClick = {
+                    viewModel.onEvent(AddListingFormEvent.Submit)
+                },
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(top = 45.dp)
@@ -184,8 +215,8 @@ fun CreateListing(navHost: NavController) {
 
 @Preview(showBackground = true)
 @Composable
-fun DefaultPreview3() {
+fun CreateListingPreview() {
     NBayTheme {
-        CreateListing(rememberNavController());
+        AddListingScreen(rememberNavController());
     }
 }

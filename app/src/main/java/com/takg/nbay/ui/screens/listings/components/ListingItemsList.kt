@@ -16,8 +16,6 @@ import java.text.NumberFormat
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun ListingItemsList(items: List<Listing>) {
-    val formatter = NumberFormat.getCurrencyInstance()
-
     LazyVerticalGrid(
         cells = GridCells.Fixed(2),
         contentPadding = PaddingValues(
@@ -31,8 +29,9 @@ fun ListingItemsList(items: List<Listing>) {
             val listing = items[idx]
             Box(modifier = Modifier.padding(horizontal = 6.dp)) {
                 ListingLineItem(
-                    title = listing.title,
-                    price = formatter.format(listing.price)
+                    title = listing.title ?: "",
+                    price = "₨ ${listing.price}",
+                    imageUrl = listing.imageUrl
                 )
             }
 

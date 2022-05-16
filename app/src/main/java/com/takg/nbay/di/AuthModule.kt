@@ -9,10 +9,13 @@ import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.ktx.Firebase
 import com.takg.nbay.R
 import com.takg.nbay.data.repository.AuthRepositoryImpl
+import com.takg.nbay.data.repository.UserRepositoryImpl
 import com.takg.nbay.domain.repository.AuthRepository
 import com.takg.nbay.domain.repository.UserRepository
 import com.takg.nbay.domain.use_case.CreateUser
@@ -26,6 +29,13 @@ import dagger.hilt.components.SingletonComponent
 class AuthModule {
 
     @Provides
+    fun provideFirebaseAuth() = Firebase.auth
+
+    @Provides
+    fun provideUserRepository(auth: FirebaseAuth, store: FirebaseFirestore): UserRepository =
+        UserRepositoryImpl(auth, store)
+
+    @Provides
     fun provideAuthRepository(
         auth: FirebaseAuth,
         store: FirebaseFirestore,
@@ -36,4 +46,8 @@ class AuthModule {
             store = store
         )
     }
+
+    @Provides
+    fun provideCreateUser(userRepository: UserRepository) = CreateUser(userRepository)
+
 }

@@ -1,5 +1,7 @@
 package com.takg.nbay.ui.screens.listings.components
 
+import android.media.Image
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -33,14 +35,23 @@ fun ListingLineItem(title: String, price: String, imageUrl: String? = null) {
     ) {
 
         Column(modifier = Modifier.padding(bottom = 10.dp)) {
-            AsyncImage(
-                model = ImageRequest.Builder(LocalContext.current)
-                    .data(imageUrl)
-                    .crossfade(true)
-                    .build(),
-                placeholder = painterResource(R.drawable.box_placeholder),
-                contentDescription = title,
-            )
+
+            if (imageUrl == null) {
+                Image(
+                    painter = painterResource(id = R.drawable.box_placeholder),
+                    contentDescription = title,
+                )
+            } else {
+                AsyncImage(
+                    model = ImageRequest.Builder(LocalContext.current)
+                        .data(imageUrl)
+                        .crossfade(true)
+                        .build(),
+                    placeholder = painterResource(R.drawable.box_placeholder),
+                    contentDescription = title,
+                )
+            }
+
             Text(
                 text = price,
                 style = MaterialTheme.typography.h6,

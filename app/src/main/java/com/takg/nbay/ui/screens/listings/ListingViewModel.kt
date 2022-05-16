@@ -28,7 +28,7 @@ class ListingViewModel @Inject constructor(
     val state: State<ListingsViewState> = _state
 
     init {
-//        getListings()
+        getListings()
     }
 
     private fun getListings() {
