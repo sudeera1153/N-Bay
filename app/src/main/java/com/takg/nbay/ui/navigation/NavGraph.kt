@@ -8,6 +8,7 @@ import com.takg.nbay.ui.screens.auth.AuthScreen
 import com.takg.nbay.ui.screens.auth.login.LoginScreen
 import com.takg.nbay.ui.screens.auth.signup.SignUpScreen
 import com.takg.nbay.ui.screens.home.HomeScreen
+import com.takg.nbay.ui.screens.userprofile.UserProfileScreen
 import com.takg.nbay.ui.screens.welcome.AnimatedSplashScreen
 
 @Composable
@@ -32,7 +33,10 @@ fun SetupNavGraph(navController: NavHostController) {
             SignUpScreen(navController = navController)
         }
         composable(route = Screen.Home.route) {
-            HomeScreen()
+            HomeScreen(navController=navController)
+        }
+        composable(route = Screen.UserProfile.route){
+            UserProfileScreen()
         }
 
     }

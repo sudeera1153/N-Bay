@@ -13,12 +13,14 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import com.takg.nbay.data.DrawerData
+import com.takg.nbay.ui.navigation.Screen
 import com.takg.nbay.ui.theme.NBayTheme
 import com.takg.nbay.ui.theme.Nsbmblue
 
 @Composable
-fun drawer(scrollState: ScrollState){
+fun Drawer(scrollState: ScrollState,navController: NavController){
 
     val MenuList = listOf(
         DrawerData.Home,
@@ -57,7 +59,7 @@ fun drawer(scrollState: ScrollState){
                     modifier = Modifier.padding(start = 20.dp,bottom = 20.dp,top = 20.dp))
                 }
                 else ->{
-                    Button(onClick = { /*TODO*/ },colors = ButtonDefaults.buttonColors(
+                    Button(onClick = { navController.navigate(Screen.UserProfile.route) },colors = ButtonDefaults.buttonColors(
                         backgroundColor = Color.White),elevation = null) {
                         DrawerItem(item = item)
                     }
