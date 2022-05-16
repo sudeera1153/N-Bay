@@ -6,12 +6,14 @@ import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.tooling.preview.Preview
-import com.takg.nbay.ui.components.drawer
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
+import com.takg.nbay.ui.components.Drawer
 import com.takg.nbay.ui.components.searchbar
 
 
 @Composable
-fun HomeScreen() {
+fun HomeScreen(navController: NavController) {
     val scaffoldState = rememberScaffoldState()
     val coroutineScope = rememberCoroutineScope()
     val scrollState = rememberScrollState()
@@ -19,7 +21,7 @@ fun HomeScreen() {
     Scaffold(scaffoldState = scaffoldState,
         topBar = { searchbar(scaffoldState, coroutineScope) },
         drawerContent = {
-            drawer(scrollState)
+            Drawer(scrollState,navController)
         }) {
         HomeContent()
 
@@ -29,5 +31,5 @@ fun HomeScreen() {
 @Preview(showBackground = true)
 @Composable
 fun DefaultPreview() {
-    HomeScreen()
+    HomeScreen(rememberNavController())
 }
