@@ -12,6 +12,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.takg.nbay.domain.model.Listing
 import com.takg.nbay.ui.components.AppTabBar
 import com.takg.nbay.ui.components.AppTabs
@@ -23,7 +25,7 @@ enum class ListingsTab {
 }
 
 @Composable
-fun UserListingScreen() {
+fun UserListingScreen(navController: NavController) {
     var tabSelected by remember { mutableStateOf(ListingsTab.ONGOING) }
 
     val listings = listOf(
@@ -50,7 +52,11 @@ fun UserListingScreen() {
                     verticalAlignment = Alignment.CenterVertically,
                     horizontalArrangement = Arrangement.Start,
                 ) {
-                    IconButton(onClick = { /*TODO*/ }) {
+                    IconButton(
+                        onClick = {
+                            navController.popBackStack()
+                        },
+                    ) {
                         Icon(Icons.Outlined.ArrowBack, contentDescription = "")
                     }
                     Text(
@@ -107,7 +113,7 @@ fun HomeTabBar(
 @Composable
 fun MyListingsScreenPreview() {
     NBayTheme() {
-        UserListingScreen()
+        UserListingScreen(rememberNavController())
     }
 
 }

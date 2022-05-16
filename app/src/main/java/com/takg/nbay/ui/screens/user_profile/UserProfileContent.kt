@@ -15,10 +15,13 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
+import com.takg.nbay.ui.navigation.Screen
 import com.takg.nbay.ui.theme.NBayTheme
 
 @Composable
-fun UserProfileContent(){
+fun UserProfileContent(navController: NavController) {
     Surface() {
         Column(
             modifier = Modifier
@@ -30,6 +33,7 @@ fun UserProfileContent(){
 
             Button(
                 onClick = {
+                          navController.navigate(Screen.UserListing.route)
                 },
                 modifier = Modifier
                     .fillMaxWidth()
@@ -40,7 +44,7 @@ fun UserProfileContent(){
                 colors = ButtonDefaults.buttonColors(
                     backgroundColor = Color.White,
                 )
-            ){
+            ) {
                 Text(text = "My Listings")
             }
 
@@ -56,7 +60,7 @@ fun UserProfileContent(){
                 colors = ButtonDefaults.buttonColors(
                     backgroundColor = Color.White,
                 )
-            ){
+            ) {
                 Text(text = "Payments")
             }
 
@@ -72,7 +76,7 @@ fun UserProfileContent(){
                 colors = ButtonDefaults.buttonColors(
                     backgroundColor = Color.White,
                 )
-            ){
+            ) {
                 Text(text = "Update Profile")
             }
 
@@ -81,14 +85,14 @@ fun UserProfileContent(){
                 },
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(top=35.dp,bottom = 25.dp)
+                    .padding(top = 35.dp, bottom = 25.dp)
                     .clip(RoundedCornerShape(15.dp))
                     .border(BorderStroke(1.dp, color = Color.Black), shape = CircleShape),
                 contentPadding = PaddingValues(vertical = 15.dp),
                 colors = ButtonDefaults.buttonColors(
                     backgroundColor = Color.White,
                 )
-            ){
+            ) {
                 Text(text = "About")
             }
 
@@ -104,7 +108,7 @@ fun UserProfileContent(){
                 colors = ButtonDefaults.buttonColors(
                     backgroundColor = Color.White,
                 )
-            ){
+            ) {
                 Text(text = "Contact Us")
             }
 
@@ -119,6 +123,6 @@ fun UserProfileContent(){
 @Composable
 fun DefaultPreview1() {
     NBayTheme {
-        UserProfileContent()
+        UserProfileContent(rememberNavController())
     }
 }

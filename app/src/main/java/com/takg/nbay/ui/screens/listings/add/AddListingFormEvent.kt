@@ -1,4 +1,4 @@
-package com.takg.nbay.ui.screens.listings.create
+package com.takg.nbay.ui.screens.listings.add
 
 sealed class AddListingFormEvent {
     data class TitleChanged(val title: String) : AddListingFormEvent()

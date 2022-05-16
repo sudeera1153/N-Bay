@@ -1,4 +1,4 @@
-package com.takg.nbay.ui.screens.listings.create
+package com.takg.nbay.ui.screens.listings.add
 
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf

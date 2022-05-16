@@ -1,5 +1,6 @@
 package com.takg.nbay.ui.screens.user_profile
 
+import androidx.activity.OnBackPressedCallback
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
@@ -12,29 +13,33 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.material.icons.Icons
 import androidx.compose.runtime.*
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.compose.rememberNavController
 import com.takg.nbay.ui.theme.NBayTheme
 
 @Composable
-fun UserProfileAppBar()
-{
+fun UserProfileAppBar(
+    onBackPressed: () -> Unit,
+    onAddListing: () -> Unit
+) {
     Surface(color = Color.White) {
         TopAppBar(modifier = Modifier.fillMaxWidth(), backgroundColor = Color(0xff0aa1dd)) {
-            Row(modifier = Modifier
-                .padding(8.dp)
-                .fillMaxWidth()
-                .fillMaxHeight(),
+            Row(
+                modifier = Modifier
+                    .padding(8.dp)
+                    .fillMaxWidth()
+                    .fillMaxHeight(),
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
-                IconButton(onClick = { /*TODO*/ }) {
-                    Icon(Icons.Outlined.ArrowBack,contentDescription = "")
+                IconButton(onClick = onBackPressed) {
+                    Icon(Icons.Outlined.ArrowBack, contentDescription = "")
                 }
                 OutlinedButton(
-                    onClick = {},
+                    onClick = onAddListing,
                     shape = CircleShape,
                     border = BorderStroke(width = 1.dp, color = Color.White),
                 ) {
-                   Text("Create New Listings", color = Color.Black)
+                    Text("Create New Listings", color = Color.Black)
                 }
 
             }
@@ -48,6 +53,7 @@ fun UserProfileAppBar()
 @Composable
 fun DefaultPreview5() {
     NBayTheme {
-        UserProfileAppBar();
+        val callback: () -> Unit = {}
+        UserProfileAppBar(callback, callback);
     }
 }

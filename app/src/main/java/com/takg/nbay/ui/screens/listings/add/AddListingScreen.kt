@@ -1,4 +1,4 @@
-package com.takg.nbay.ui.screens.listings.create
+package com.takg.nbay.ui.screens.listings.add
 
 import android.widget.Toast
 import androidx.compose.foundation.Image
@@ -64,7 +64,11 @@ fun AddListingScreen(
                 backgroundColor = Color.White,
                 elevation = 0.dp
             ) {
-                IconButton(onClick = {}) {
+                IconButton(
+                    onClick = {
+                        navController.popBackStack()
+                    },
+                ) {
                     Icon(
                         Icons.Default.ArrowBack,
                         contentDescription = "Back Button",

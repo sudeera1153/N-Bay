@@ -61,7 +61,22 @@ fun Drawer(scrollState: ScrollState, navController: NavController) {
                 }
                 else -> {
                     Button(
-                        onClick = { navController.navigate(Screen.AddListing.route) },
+                        onClick = {
+                            when (item) {
+                                DrawerData.Home -> {
+                                    navController.navigate(Screen.Home.route)
+                                }
+                                DrawerData.MyListings -> {
+                                    navController.navigate(Screen.UserListing.route)
+                                }
+                                DrawerData.Profile -> {
+                                    navController.navigate(Screen.UserProfile.route)
+                                }
+                                else -> {
+
+                                }
+                            }
+                        },
                         colors = ButtonDefaults.buttonColors(
                             backgroundColor = Color.White
                         ),

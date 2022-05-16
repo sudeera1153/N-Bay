@@ -9,7 +9,7 @@ import com.takg.nbay.ui.screens.auth.AuthScreen
 import com.takg.nbay.ui.screens.auth.login.LoginScreen
 import com.takg.nbay.ui.screens.auth.signup.SignUpScreen
 import com.takg.nbay.ui.screens.home.HomeScreen
-import com.takg.nbay.ui.screens.listings.create.AddListingScreen
+import com.takg.nbay.ui.screens.listings.add.AddListingScreen
 import com.takg.nbay.ui.screens.user_listings.UserListingScreen
 import com.takg.nbay.ui.screens.user_profile.UserProfileScreen
 import com.takg.nbay.ui.screens.welcome.AnimatedSplashScreen
@@ -47,13 +47,13 @@ fun Navigation(viewModel: NavigationViewModel = hiltViewModel()) {
             HomeScreen(navController = navController)
         }
         composable(route = Screen.UserProfile.route) {
-            UserProfileScreen()
+            UserProfileScreen(navController = navController)
         }
         composable(route = Screen.AddListing.route) {
             AddListingScreen(navController = navController)
         }
         composable(route = Screen.UserListing.route) {
-            UserListingScreen()
+            UserListingScreen(navController = navController)
         }
     }
 }
