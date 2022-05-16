@@ -1,4 +1,4 @@
-package com.takg.nbay.ui.screens.userprofile
+package com.takg.nbay.ui.screens.user_profile
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.*

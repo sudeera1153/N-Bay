@@ -75,7 +75,7 @@ dependencies {
     implementation "com.google.firebase:firebase-firestore-ktx"
 
     //Play Services
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.6.1"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.6.0"
     implementation "com.google.android.gms:play-services-auth:20.2.0"
 
     //Dagger - Hilt
@@ -88,4 +88,9 @@ dependencies {
 
     //Placeholder
     implementation "com.google.accompanist:accompanist-placeholder-material:0.14.0"
+
+    //Accompanist
+    implementation 'com.google.accompanist:accompanist-pager:0.21-0-beta'
+    implementation 'com.google.accompanist:accompanist-pager-indicators:0.21.0-beta'
+    implementation 'androidx.compose.foundation:foundation:1.1.1'
 }

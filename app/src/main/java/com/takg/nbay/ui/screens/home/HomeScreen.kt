@@ -10,7 +10,7 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.takg.nbay.ui.components.Drawer
 import com.takg.nbay.ui.components.SearchBar
-import com.takg.nbay.ui.screens.listings.ListingsScreenContent
+import com.takg.nbay.ui.screens.listings.index.ListingsScreenContent
 
 
 @Composable

@@ -10,7 +10,8 @@ import com.takg.nbay.ui.screens.auth.login.LoginScreen
 import com.takg.nbay.ui.screens.auth.signup.SignUpScreen
 import com.takg.nbay.ui.screens.home.HomeScreen
 import com.takg.nbay.ui.screens.listings.create.AddListingScreen
-import com.takg.nbay.ui.screens.userprofile.UserProfileScreen
+import com.takg.nbay.ui.screens.user_listings.UserListingScreen
+import com.takg.nbay.ui.screens.user_profile.UserProfileScreen
 import com.takg.nbay.ui.screens.welcome.AnimatedSplashScreen
 
 @Composable
@@ -50,6 +51,9 @@ fun Navigation(viewModel: NavigationViewModel = hiltViewModel()) {
         }
         composable(route = Screen.AddListing.route) {
             AddListingScreen(navController = navController)
+        }
+        composable(route = Screen.UserListing.route) {
+            UserListingScreen()
         }
     }
 }
