@@ -17,6 +17,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             NBayTheme {
                 Surface(color = MaterialTheme.colors.background) {
+                    // Setup Navigation Graph
                     Navigation(
                         outputDirectoryCallback = {
                             getOutputDirectory()
@@ -27,6 +28,9 @@ class MainActivity : ComponentActivity() {
         }
     }
 
+    /**
+     * Get output directory for images
+     */
     private fun getOutputDirectory(): File {
         val mediaDir = externalMediaDirs.firstOrNull()?.let {
             File(it, resources.getString(R.string.app_name)).apply { mkdirs() }
