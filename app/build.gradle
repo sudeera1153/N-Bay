@@ -93,4 +93,7 @@ dependencies {
     implementation 'com.google.accompanist:accompanist-pager:0.21-0-beta'
     implementation 'com.google.accompanist:accompanist-pager-indicators:0.21.0-beta'
     implementation 'androidx.compose.foundation:foundation:1.1.1'
+
+    //NumberPicker
+    implementation 'com.chillibits:composenumberpicker:1.1.0'
 }
