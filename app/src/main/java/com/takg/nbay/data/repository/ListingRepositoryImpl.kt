@@ -16,13 +16,20 @@ import kotlinx.coroutines.tasks.await
 import javax.inject.Inject
 
 class ListingRepositoryImpl @Inject constructor(
-    private val auth: AuthRepository,
     store: FirebaseFirestore
 ) : ListingRepository {
 
     private val listingsRef = store.collection("listings")
 
-    override fun getListings(): Flow<Resource<List<Listing>>> = callbackFlow {
+    override suspend fun findById(id: String): Listing? {
+        val document = listingsRef.document(id).get().await()
+        val listing = document.toObject(Listing::class.java)
+        listing?.id = document.id
+
+        return listing
+    }
+
+    override fun all(): Flow<Resource<List<Listing>>> = callbackFlow {
         val snapshotListener = listingsRef.orderBy("createdAt", Query.Direction.DESCENDING)
             .addSnapshotListener { snapshot, e ->
                 val response = if (snapshot != null) {
@@ -45,27 +52,39 @@ class ListingRepositoryImpl @Inject constructor(
         }
     }
 
-    override suspend fun addListing(
+    override suspend fun add(
         title: String,
         description: String,
         condition: ItemCondition,
         category: ItemCategory,
         price: Double,
         uid: String
-    ): Resource<Void> {
-        try {
-            val id = listingsRef.document().id
-            val listing = Listing(
-                id = id,
-                title = title,
-                desc = description,
-                isExternal = true,
-                price = price,
-            )
-            val addition = listingsRef.document(id).set(listing).await()
-            return Resource.Success(addition)
+    ): Resource<Void> = try {
+        val id = listingsRef.document().id
+        val listing = Listing(
+            id = id,
+            title = title,
+            desc = description,
+            isExternal = true,
+            price = price,
+            uid = uid
+        )
+        val addition = listingsRef.document(id).set(listing).await()
+        Resource.Success(addition)
+    } catch (e: Exception) {
+        Resource.Error(e.message ?: e.toString(), exception = e)
+    }
+
+    override suspend fun update(id: String, listing: Listing): Resource<Unit> {
+        TODO("Not yet implemented")
+    }
+
+    override suspend fun removeById(id: String): Resource<Unit> {
+        return try {
+            val document = listingsRef.document(id).delete()
+            Resource.Success(Unit)
         } catch (e: Exception) {
-            return Resource.Error(e.message ?: e.toString(), exception = e)
+            Resource.Error(e.message ?: "Unknown error", exception = e)
         }
     }
 }

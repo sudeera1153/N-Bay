@@ -27,7 +27,7 @@ fun HomeScreen(navController: NavController) {
         },
     ) {
 
-        ListingsScreenContent()
+        ListingsScreenContent(navController = navController)
     }
 }
 

@@ -13,8 +13,7 @@ import com.takg.nbay.data.repository.UserRepositoryImpl
 import com.takg.nbay.domain.repository.AuthRepository
 import com.takg.nbay.domain.repository.ListingRepository
 import com.takg.nbay.domain.repository.UserRepository
-import com.takg.nbay.domain.use_case.AddListing
-import com.takg.nbay.domain.use_case.CreateUser
+import com.takg.nbay.domain.use_case.*
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -31,16 +30,24 @@ class AppModule {
     @Provides
     fun provideFirebaseFirestore() = Firebase.firestore
 
-
     @Provides
-    fun provideListingRepository(
-        auth: AuthRepository,
-        store: FirebaseFirestore
-    ): ListingRepository =
-        ListingRepositoryImpl(auth, store)
+    fun provideListingRepository(store: FirebaseFirestore): ListingRepository =
+        ListingRepositoryImpl(store)
 
     @Provides
     fun provideAddListing(auth: AuthRepository, listingRepository: ListingRepository) =
         AddListing(auth, listingRepository)
+
+    @Provides
+    fun provideGetListings(listingRepository: ListingRepository) =
+        GetListings(listingRepository)
+
+    @Provides
+    fun provideGetListing(userRepository: UserRepository, listingRepository: ListingRepository) =
+        GetListing(userRepository, listingRepository)
+
+    @Provides
+    fun provideRemoveListing(listingRepository: ListingRepository) =
+        RemoveListing(listingRepository)
 
 }

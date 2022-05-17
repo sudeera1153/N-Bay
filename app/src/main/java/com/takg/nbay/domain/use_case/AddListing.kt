@@ -31,7 +31,7 @@ class AddListing @Inject constructor(
                 }
                 val user: FirebaseUser = authRepository.getCurrentUser()!!
 
-                val response = repository.addListing(
+                val response = repository.add(
                     title = title,
                     description = description,
                     price = price,

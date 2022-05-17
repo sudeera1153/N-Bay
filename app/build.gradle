@@ -75,7 +75,7 @@ dependencies {
     implementation "com.google.firebase:firebase-firestore-ktx"
 
     //Play Services
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.6.0"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.6.1"
     implementation "com.google.android.gms:play-services-auth:20.2.0"
 
     //Dagger - Hilt
@@ -90,10 +90,18 @@ dependencies {
     implementation "com.google.accompanist:accompanist-placeholder-material:0.14.0"
 
     //Accompanist
-    implementation 'com.google.accompanist:accompanist-pager:0.21-0-beta'
+    implementation 'com.google.accompanist:accompanist-pager:0.21.0-beta'
     implementation 'com.google.accompanist:accompanist-pager-indicators:0.21.0-beta'
     implementation 'androidx.compose.foundation:foundation:1.1.1'
 
     //NumberPicker
     implementation 'com.chillibits:composenumberpicker:1.1.0'
+
+    //Camera
+    implementation "androidx.camera:camera-camera2:1.1.0-rc01"
+    implementation "androidx.camera:camera-view:1.1.0-rc01"
+    implementation "androidx.camera:camera-lifecycle:1.0.2"
+
+    //Permissions
+    implementation "com.google.accompanist:accompanist-permissions:0.18.0"
 }
