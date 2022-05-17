@@ -1,4 +1,4 @@
-package com.takg.nbay.components
+package com.takg.nbay.ui.components
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
@@ -20,29 +20,37 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
 @Composable
-fun searchbar(scaffoldState : ScaffoldState,scope:CoroutineScope){
-    Box(modifier = Modifier.padding(10.dp)){
-        Card(shape = RoundedCornerShape(10.dp),
+fun SearchBar(scaffoldState: ScaffoldState, scope: CoroutineScope) {
+    Box(modifier = Modifier.padding(10.dp)) {
+        Card(
+            shape = RoundedCornerShape(10.dp),
             elevation = 6.dp,
-            modifier = Modifier.requiredHeight(50.dp)) {
-            Row (verticalAlignment = Alignment.CenterVertically,
-                 modifier = Modifier
-                     .fillMaxSize()
-                     .padding(8.dp)
-                     .align(Alignment.Center)){
+            modifier = Modifier.requiredHeight(50.dp)
+        ) {
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(8.dp)
+                    .align(Alignment.Center)
+            ) {
                 IconButton(onClick = {
-                    scope.launch{
+                    scope.launch {
                         scaffoldState.drawerState.open()
-                    } }) {
-                    Icon(Icons.Default.Menu,"Menu")
+                    }
+                }) {
+                    Icon(Icons.Default.Menu, "Menu")
                 }
                 //TextField(value = "text",onValueChange = {newText ->newText})
-                Text(text = "Search Your Item",modifier = Modifier
-                    .padding(start = 0.dp)
-                    .weight(2.0f)
-                    ,textAlign = TextAlign.Center)
-                Image(painter = painterResource(id = R.drawable.nbay_cropped),
-                    contentDescription = "Nbay Icon",modifier = Modifier.size(50.dp))
+                Text(
+                    text = "Search Your Item", modifier = Modifier
+                        .padding(start = 0.dp)
+                        .weight(2.0f), textAlign = TextAlign.Center
+                )
+                Image(
+                    painter = painterResource(id = R.drawable.nbay_cropped),
+                    contentDescription = "Nbay Icon", modifier = Modifier.size(50.dp)
+                )
 
             }
         }
@@ -51,11 +59,11 @@ fun searchbar(scaffoldState : ScaffoldState,scope:CoroutineScope){
 
 @Preview
 @Composable
-fun DefaultPreview1(){
+fun DefaultPreview1() {
     NBayTheme {
         val scaffoldState = rememberScaffoldState()
         val coroutineScope = rememberCoroutineScope()
-        searchbar(scaffoldState,coroutineScope)
+        SearchBar(scaffoldState, coroutineScope)
 
     }
 }
