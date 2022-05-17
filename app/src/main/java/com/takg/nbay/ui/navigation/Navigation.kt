@@ -13,14 +13,18 @@ import com.takg.nbay.ui.screens.listings.add.AddListingScreen
 import com.takg.nbay.ui.screens.user_listings.UserListingScreen
 import com.takg.nbay.ui.screens.user_profile.UserProfileScreen
 import com.takg.nbay.ui.screens.welcome.AnimatedSplashScreen
+import java.io.File
 
 @Composable
-fun Navigation(viewModel: NavigationViewModel = hiltViewModel()) {
+fun Navigation(
+    outputDirectoryCallback: () -> File,
+    viewModel: NavigationViewModel = hiltViewModel()
+) {
     val navController = rememberNavController()
     var startDestination = Screen.Auth.route
 
     if (viewModel.isUserAuthenticated) {
-        startDestination = Screen.Home.route
+        startDestination = Screen.AddListing.route
     }
 
     NavHost(
@@ -50,7 +54,10 @@ fun Navigation(viewModel: NavigationViewModel = hiltViewModel()) {
             UserProfileScreen(navController = navController)
         }
         composable(route = Screen.AddListing.route) {
-            AddListingScreen(navController = navController)
+            AddListingScreen(
+                outputDirectoryCallback = outputDirectoryCallback,
+                navController = navController
+            )
         }
         composable(route = Screen.UserListing.route) {
             UserListingScreen(navController = navController)

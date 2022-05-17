@@ -23,9 +23,3 @@ fun ListingsScreenContent(
         Toast.makeText(LocalContext.current, "Loading", Toast.LENGTH_LONG).show()
     }
 }
-
-@Composable
-@Preview
-fun ListingsScreenPreview() {
-
-}

@@ -53,7 +53,7 @@ class ListingRepositoryImpl @Inject constructor(
         price: Double,
         uid: String
     ): Resource<Void> {
-        try {
+        return try {
             val id = listingsRef.document().id
             val listing = Listing(
                 id = id,
@@ -63,9 +63,9 @@ class ListingRepositoryImpl @Inject constructor(
                 price = price,
             )
             val addition = listingsRef.document(id).set(listing).await()
-            return Resource.Success(addition)
+            Resource.Success(addition)
         } catch (e: Exception) {
-            return Resource.Error(e.message ?: e.toString(), exception = e)
+            Resource.Error(e.message ?: e.toString(), exception = e)
         }
     }
 }

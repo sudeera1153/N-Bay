@@ -5,34 +5,26 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.takg.nbay.common.Resource
-import com.takg.nbay.domain.model.Listing
-import com.takg.nbay.domain.repository.ListingRepository
+import com.takg.nbay.domain.use_case.GetListings
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import javax.inject.Inject
 
 
-data class ListingsViewState(
-    val isLoading: Boolean = false,
-    val listings: List<Listing> = emptyList(),
-    val error: String = ""
-)
-
-
 @HiltViewModel
 class ListingViewModel @Inject constructor(
-    private val repository: ListingRepository
+    private val getListings: GetListings
 ) : ViewModel() {
     private val _state = mutableStateOf(ListingsViewState())
     val state: State<ListingsViewState> = _state
 
     init {
-        getListings()
+        loadListings()
     }
 
-    private fun getListings() {
-        repository.getListings().onEach { result ->
+    private fun loadListings() {
+        getListings().onEach { result ->
             when (result) {
                 is Resource.Error -> {
                     _state.value =
