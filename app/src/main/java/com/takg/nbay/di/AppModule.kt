@@ -44,7 +44,7 @@ class AppModule {
         AddListing(auth, listingRepository)
 
     @Provides
-    fun provideAddListing(listingRepository: ListingRepository) =
+    fun provideGetListing(listingRepository: ListingRepository) =
         GetListings(listingRepository)
 
 }
