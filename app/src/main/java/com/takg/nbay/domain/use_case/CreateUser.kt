@@ -15,7 +15,7 @@ class CreateUser @Inject constructor(
             try {
                 emit(Resource.Loading())
 
-                val response = repository.create(email, password)
+                val response = repository.add(email, password)
                 emit(response)
 
             } catch (e: IOException) {

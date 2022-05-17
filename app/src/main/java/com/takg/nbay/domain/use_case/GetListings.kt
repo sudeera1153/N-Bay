@@ -15,7 +15,7 @@ class GetListings @Inject constructor(
         flow {
             emit(Resource.Loading())
 
-            repository.getListings().collect { result ->
+            repository.all().collect { result ->
                 when (result) {
                     is Resource.Error -> {
                         if (result.e is IOException) {

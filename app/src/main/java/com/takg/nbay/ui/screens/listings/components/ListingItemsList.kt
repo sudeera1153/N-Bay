@@ -15,7 +15,7 @@ import java.text.NumberFormat
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun ListingItemsList(items: List<Listing>) {
+fun ListingItemsList(items: List<Listing>, onItemClick: (id: String) -> Unit) {
     LazyVerticalGrid(
         cells = GridCells.Fixed(2),
         contentPadding = PaddingValues(
@@ -31,7 +31,10 @@ fun ListingItemsList(items: List<Listing>) {
                 ListingLineItem(
                     title = listing.title ?: "",
                     price = "₨ ${listing.price}",
-                    imageUrl = listing.imageUrl
+                    imageUrl = listing.imageUrl,
+                    onClickAction = {
+                        onItemClick.invoke(listing.id!!)
+                    }
                 )
             }
 
@@ -49,5 +52,7 @@ fun ListingItemsListPreview() {
         Listing(id = "4", title = "Sample Item 4", price = 250.00, isExternal = false)
     )
 
-    ListingItemsList(listings)
+    ListingItemsList(listings) {
+
+    }
 }

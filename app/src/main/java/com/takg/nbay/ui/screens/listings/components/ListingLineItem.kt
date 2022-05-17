@@ -1,6 +1,6 @@
 package com.takg.nbay.ui.screens.listings.components
 
-import android.media.Image
+
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
@@ -21,16 +21,21 @@ import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.takg.nbay.R
 import com.takg.nbay.ui.theme.NBayTheme
-import java.text.NumberFormat
-import java.util.*
 
 @Composable
-fun ListingLineItem(title: String, price: String, imageUrl: String? = null) {
+fun ListingLineItem(
+    title: String,
+    price: String,
+    imageUrl: String? = null,
+    onClickAction: () -> Unit
+) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
             .padding(bottom = 16.dp)
-            .clickable { },
+            .clickable {
+                onClickAction.invoke()
+            },
         shape = RoundedCornerShape(14.dp)
     ) {
 
@@ -70,13 +75,14 @@ fun ListingLineItem(title: String, price: String, imageUrl: String? = null) {
 @Composable
 fun ListingItemPreview() {
     val title = "Apple Iphone 13 Pro"
-    val price = 320_000.50
-    val formatter = NumberFormat.getCurrencyInstance()
-    val formattedPrice = formatter.format(price)
+    val price = "Rs 200.00"
 
     NBayTheme {
         Surface(color = MaterialTheme.colors.background) {
-            ListingLineItem(title, formattedPrice)
+            ListingLineItem(title = title, price = price) {
+
+            }
         }
     }
 }
+

@@ -7,10 +7,9 @@ import com.takg.nbay.domain.model.Listing
 import kotlinx.coroutines.flow.Flow
 
 interface ListingRepository {
-
-    fun getListings(): Flow<Resource<List<Listing>>>
-
-    suspend fun addListing(
+    fun all(): Flow<Resource<List<Listing>>>
+    suspend fun findById(id: String): Listing?
+    suspend fun add(
         title: String,
         description: String,
         condition: ItemCondition,
@@ -18,4 +17,7 @@ interface ListingRepository {
         price: Double,
         uid: String,
     ): Resource<Void>
+
+    suspend fun update(id: String, listing: Listing): Resource<Unit>
+    suspend fun removeById(id: String): Resource<Unit>
 }

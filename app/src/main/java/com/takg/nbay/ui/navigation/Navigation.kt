@@ -10,6 +10,7 @@ import com.takg.nbay.ui.screens.auth.login.LoginScreen
 import com.takg.nbay.ui.screens.auth.signup.SignUpScreen
 import com.takg.nbay.ui.screens.home.HomeScreen
 import com.takg.nbay.ui.screens.listings.add.AddListingScreen
+import com.takg.nbay.ui.screens.listings.single.SingleListingScreen
 import com.takg.nbay.ui.screens.user_listings.UserListingScreen
 import com.takg.nbay.ui.screens.user_profile.UserProfileScreen
 import com.takg.nbay.ui.screens.welcome.AnimatedSplashScreen
@@ -24,7 +25,7 @@ fun Navigation(
     var startDestination = Screen.Auth.route
 
     if (viewModel.isUserAuthenticated) {
-        startDestination = Screen.AddListing.route
+        startDestination = Screen.Home.route
     }
 
     NavHost(
@@ -47,9 +48,6 @@ fun Navigation(
         composable(route = Screen.SignUp.route) {
             SignUpScreen(navController = navController)
         }
-        composable(route = Screen.Home.route) {
-            HomeScreen(navController = navController)
-        }
         composable(route = Screen.UserProfile.route) {
             UserProfileScreen(navController = navController)
         }
@@ -59,9 +57,17 @@ fun Navigation(
                 navController = navController
             )
         }
+        composable(route = Screen.Home.route) {
+            HomeScreen(navController = navController)
+        }
         composable(route = Screen.UserListing.route) {
             UserListingScreen(navController = navController)
         }
+        composable(route = "${Screen.SingleListing.route}/{listingId}") {
+            SingleListingScreen(navController = navController)
+        }
+//        composable(route = "${Screen.MakePayment.route}/{listingId}") {
+//        }
     }
 }
 

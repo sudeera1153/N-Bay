@@ -1,6 +1,5 @@
 package com.takg.nbay.domain.model
 
-import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.ServerTimestamp
 import java.util.*
 
@@ -16,7 +15,7 @@ data class Listing(
     var price: Double? = null,
     var desc: String? = null,
     var imageUrl: String? = null,
-
+    var uid: String? = null,
     @ServerTimestamp
     var createdAt: Date? = null,
     var updatedAt: Date? = null,

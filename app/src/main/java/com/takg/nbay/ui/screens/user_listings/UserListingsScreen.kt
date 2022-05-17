@@ -79,13 +79,19 @@ fun UserListingScreen(navController: NavController) {
             )
             when (tabSelected) {
                 ListingsTab.ONGOING -> {
-                    ListingItemsList(items = listings)
+                    ListingItemsList(items = listings) {
+
+                    }
                 }
                 ListingsTab.PENDING -> {
-                    ListingItemsList(items = listings)
+                    ListingItemsList(items = listings) {
+
+                    }
                 }
                 ListingsTab.FINISHED -> {
-                    ListingItemsList(items = emptyList())
+                    ListingItemsList(items = emptyList()) {
+
+                    }
                 }
             }
         }
