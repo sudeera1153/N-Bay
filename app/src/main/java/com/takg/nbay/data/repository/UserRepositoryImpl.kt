@@ -14,7 +14,7 @@ class UserRepositoryImpl @Inject constructor(
     private val auth: FirebaseAuth,
     store: FirebaseFirestore
 ) : UserRepository {
-    private val usersRef = store.collection("listings")
+    private val usersRef = store.collection("users")
 
     override suspend fun findById(id: String): User? {
         return usersRef.document(id).get().await().toObject(User::class.java)

@@ -1,5 +1,6 @@
 package com.takg.nbay.ui.screens.user_listings
 
+import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
@@ -9,14 +10,17 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.takg.nbay.domain.model.Listing
 import com.takg.nbay.ui.components.AppTabBar
 import com.takg.nbay.ui.components.AppTabs
+import com.takg.nbay.ui.navigation.Screen
 import com.takg.nbay.ui.screens.listings.components.ListingItemsList
 import com.takg.nbay.ui.theme.NBayTheme
 
@@ -25,15 +29,21 @@ enum class ListingsTab {
 }
 
 @Composable
-fun UserListingScreen(navController: NavController) {
+fun UserListingScreen(
+    navController: NavController,
+    viewModel: UserListingViewModel = hiltViewModel()
+) {
     var tabSelected by remember { mutableStateOf(ListingsTab.ONGOING) }
 
-    val listings = listOf(
-        Listing(id = "1", title = "Sample Item 1", price = 1500.00, isExternal = false),
-        Listing(id = "2", title = "Sample Item 2", price = 1250.35, isExternal = false),
-        Listing(id = "3", title = "Sample Item 3", price = 15000.00, isExternal = false),
-        Listing(id = "4", title = "Sample Item 4", price = 250.00, isExternal = false)
-    )
+    val state = viewModel.state.value
+
+    if (state.error.isNotBlank()) {
+        Toast.makeText(LocalContext.current, state.error, Toast.LENGTH_LONG).show()
+    }
+
+    if (state.isLoading) {
+        Toast.makeText(LocalContext.current, "Loading", Toast.LENGTH_LONG).show()
+    }
 
 
     Scaffold(
@@ -79,18 +89,18 @@ fun UserListingScreen(navController: NavController) {
             )
             when (tabSelected) {
                 ListingsTab.ONGOING -> {
-                    ListingItemsList(items = listings) {
-
+                    ListingItemsList(items = state.listings) { listingId ->
+                        navController.navigate("${Screen.SingleListing.route}/$listingId")
                     }
                 }
                 ListingsTab.PENDING -> {
-                    ListingItemsList(items = listings) {
-
+                    ListingItemsList(items = emptyList()) { listingId ->
+                        navController.navigate("${Screen.SingleListing.route}/$listingId")
                     }
                 }
                 ListingsTab.FINISHED -> {
-                    ListingItemsList(items = emptyList()) {
-
+                    ListingItemsList(items = emptyList()) { listingId ->
+                        navController.navigate("${Screen.SingleListing.route}/$listingId")
                     }
                 }
             }

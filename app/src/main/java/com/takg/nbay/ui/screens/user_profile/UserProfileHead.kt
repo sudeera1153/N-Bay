@@ -20,17 +20,19 @@ import androidx.compose.ui.unit.dp
 import com.takg.nbay.ui.theme.NBayTheme
 
 @Composable
-fun UserProfileHead()
-{
+fun UserProfileHead(displayName: String) {
     var isInternal by remember { mutableStateOf(false) }
 
-    Surface(color = Color(0xff0aa1dd)){
-        Column(modifier = Modifier
-            .padding(16.dp)
-            .fillMaxWidth()
-            .wrapContentHeight(),
-        horizontalAlignment = Alignment.CenterHorizontally) {
-            Icon(Icons.Filled.Person, contentDescription = "",
+    Surface(color = Color(0xff0aa1dd)) {
+        Column(
+            modifier = Modifier
+                .padding(16.dp)
+                .fillMaxWidth()
+                .wrapContentHeight(),
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            Icon(
+                Icons.Filled.Person, contentDescription = "",
                 modifier = Modifier
                     .width(70.dp)
                     .height(70.dp)
@@ -42,17 +44,19 @@ fun UserProfileHead()
                     .padding(8.dp),
             )
             Spacer(modifier = Modifier.padding(8.dp))
-            Text(text = "User Name", color = Color.White, style = MaterialTheme.typography.h6)
+            Text(text = displayName, color = Color.White, style = MaterialTheme.typography.h6)
             Spacer(modifier = Modifier.padding(top = 2.dp))
-            Text(text = "Internal", color = Color.White,style = MaterialTheme.typography.caption,
-            modifier = Modifier
-                .border(
-                    BorderStroke((1.dp), color = Color.White,),
-                    shape = CircleShape
-                )
-                .padding(horizontal = 10.dp, vertical = 3.dp))
+            Text(
+                text = "Internal", color = Color.White, style = MaterialTheme.typography.caption,
+                modifier = Modifier
+                    .border(
+                        BorderStroke((1.dp), color = Color.White),
+                        shape = CircleShape
+                    )
+                    .padding(horizontal = 10.dp, vertical = 3.dp)
+            )
 
-            Spacer(modifier =Modifier.padding(8.dp))
+            Spacer(modifier = Modifier.padding(8.dp))
 
             ListCountView()
 
@@ -61,26 +65,37 @@ fun UserProfileHead()
 }
 
 @Composable
-fun ListCountView()
-{
-    Row(modifier = Modifier.fillMaxWidth()){
-        Box(modifier = Modifier.weight(1f), contentAlignment = Alignment.Center){
-            Row {
-                Text(text = "Pending Listings",color = Color.White, style = MaterialTheme.typography.caption)
+fun ListCountView() {
+    Row(modifier = Modifier.fillMaxWidth()) {
+        Box(modifier = Modifier.weight(1f), contentAlignment = Alignment.Center) {
+            Column {
+                Text(
+                    text = "Pending Listings",
+                    color = Color.White,
+                    style = MaterialTheme.typography.caption
+                )
+                Text(text = "000", color = Color.White, style = MaterialTheme.typography.h5)
             }
-            Row {
-                Text(text = "000",color = Color.White, style = MaterialTheme.typography.h5)
+        }
+        Box(modifier = Modifier.weight(1f), contentAlignment = Alignment.Center) {
+            Column {
+                Text(
+                    text = "In Progress Listings",
+                    color = Color.White,
+                    style = MaterialTheme.typography.caption
+                )
+                Text(text = "000", color = Color.White, style = MaterialTheme.typography.h5)
             }
-
-
         }
-        Box(modifier = Modifier.weight(1f), contentAlignment = Alignment.Center){
-            Text(text = "In Progress Listings",color = Color.White, style = MaterialTheme.typography.caption)
-            Text(text = "000",color = Color.White, style = MaterialTheme.typography.h5)
-        }
-        Box(modifier = Modifier.weight(1f), contentAlignment = Alignment.Center){
-            Text(text = "Finished Listings",color = Color.White, style = MaterialTheme.typography.caption)
-            Text(text = "000",color = Color.White, style = MaterialTheme.typography.h5)
+        Box(modifier = Modifier.weight(1f), contentAlignment = Alignment.Center) {
+            Column() {
+                Text(
+                    text = "Finished Listings",
+                    color = Color.White,
+                    style = MaterialTheme.typography.caption
+                )
+                Text(text = "000", color = Color.White, style = MaterialTheme.typography.h5)
+            }
         }
     }
 }
@@ -89,6 +104,6 @@ fun ListCountView()
 @Composable
 fun DefaultPreview6() {
     NBayTheme {
-        UserProfileHead();
+        UserProfileHead("John Doe");
     }
 }
