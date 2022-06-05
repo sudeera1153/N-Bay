@@ -77,27 +77,12 @@ fun UserProfileContent(navController: NavController) {
                     backgroundColor = Color.White,
                 )
             ) {
-                Text(text = "Update Profile")
-            }
-
-            Button(
-                onClick = {
-                },
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(top = 35.dp, bottom = 25.dp)
-                    .clip(RoundedCornerShape(15.dp))
-                    .border(BorderStroke(1.dp, color = Color.Black), shape = CircleShape),
-                contentPadding = PaddingValues(vertical = 15.dp),
-                colors = ButtonDefaults.buttonColors(
-                    backgroundColor = Color.White,
-                )
-            ) {
                 Text(text = "About")
             }
 
             Button(
                 onClick = {
+                    navController.navigate(Screen.ContactUs.route)
                 },
                 modifier = Modifier
                     .fillMaxWidth()

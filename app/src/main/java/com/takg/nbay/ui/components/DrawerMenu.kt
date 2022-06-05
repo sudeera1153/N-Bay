@@ -35,7 +35,6 @@ fun Drawer(scrollState: ScrollState, navController: NavController) {
         DrawerData.Educational,
         DrawerData.More,
         DrawerData.Divider,
-        DrawerData.Settings,
         DrawerData.LogOut
     )
 
