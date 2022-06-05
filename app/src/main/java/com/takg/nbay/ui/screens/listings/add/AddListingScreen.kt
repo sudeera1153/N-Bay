@@ -42,8 +42,11 @@ import com.takg.nbay.ui.components.PrimaryTextField
 import com.takg.nbay.ui.navigation.Screen
 import com.takg.nbay.ui.theme.NBayTheme
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.platform.LocalLifecycleOwner
+import androidx.compose.ui.text.input.ImeAction
 import androidx.core.content.ContextCompat
 import com.takg.nbay.common.Constants
 import java.io.File
@@ -66,6 +69,7 @@ fun AddListingScreen(
     val cameraPermissionState = rememberPermissionState(
         android.Manifest.permission.CAMERA
     )
+    val focusManager = LocalFocusManager.current
 
     LaunchedEffect(key1 = context) {
         viewModel.addListingEvents.collect {
@@ -137,6 +141,10 @@ fun AddListingScreen(
                     label = {
                         Text(text = "Title", color = Color.LightGray)
                     },
+                    keyboardOptions = KeyboardOptions(
+                        imeAction = ImeAction.Done
+                    ),
+                    keyboardActions = KeyboardActions(onDone = { focusManager.clearFocus() }),
                     leadingIcon = { Icon(Icons.Outlined.Title, contentDescription = "Title Icon") },
                     onValueChange = {
                         viewModel.onEvent(AddListingFormEvent.TitleChanged(it))
@@ -165,6 +173,10 @@ fun AddListingScreen(
                         )
                     },
                     onValueChange = { viewModel.onEvent(AddListingFormEvent.DescriptionChanged(it)) },
+                    keyboardOptions = KeyboardOptions(
+                        imeAction = ImeAction.Done
+                    ),
+                    keyboardActions = KeyboardActions(onDone = { focusManager.clearFocus() }),
                 )
                 OutLinedDropDown(
                     value = state.description,
@@ -204,6 +216,7 @@ fun AddListingScreen(
                         )
                     },
                     onValueChange = { viewModel.onEvent(AddListingFormEvent.PriceChanged(it)) },
+                    keyboardActions = KeyboardActions(onDone = { focusManager.clearFocus() }),
                 )
 
                 Button(
