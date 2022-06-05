@@ -11,7 +11,7 @@ import com.takg.nbay.ui.screens.auth.signup.SignUpScreen
 import com.takg.nbay.ui.screens.home.HomeScreen
 import com.takg.nbay.ui.screens.listings.add.AddListingScreen
 import com.takg.nbay.ui.screens.listings.single.SingleListingScreen
-import com.takg.nbay.ui.screens.settings.ContactUsScreen
+import com.takg.nbay.ui.screens.contactus.ContactUsScreen
 import com.takg.nbay.ui.screens.user_listings.UserListingScreen
 import com.takg.nbay.ui.screens.user_profile.UserProfileScreen
 import com.takg.nbay.ui.screens.welcome.AnimatedSplashScreen

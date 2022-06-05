@@ -186,6 +186,27 @@ fun AddListingScreen(
                         viewModel.onEvent(AddListingFormEvent.ConditionChanged(it))
                     }
                 )
+
+                PrimaryTextField(
+                    value = "",
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(top = 25.dp),
+                    keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Number),
+                    singleLine = true,
+                    maxLines = 1,
+                    label = {
+                        Text(text = "Contact Number", color = Color.LightGray)
+                    },
+                    leadingIcon = {
+                        Icon(
+                            Icons.Outlined.Call,
+                            contentDescription = "Call Icon"
+                        )
+                    },
+                    onValueChange = { viewModel.onEvent(AddListingFormEvent.PriceChanged(it)) },
+                )
+
                 PrimaryTextField(
                     value = state.price,
                     modifier = Modifier

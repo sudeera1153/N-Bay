@@ -67,7 +67,8 @@ fun ExternalListingPaymentScreen(navController: NavController) {
                 Column(
                     modifier = Modifier
                         .wrapContentSize()
-                        .padding(16.dp)
+                        .padding(16.dp),
+                    verticalArrangement = Arrangement.Center
                 ) {
                     Card(
                         modifier = Modifier
