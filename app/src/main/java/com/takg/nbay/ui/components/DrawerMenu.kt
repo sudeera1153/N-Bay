@@ -13,13 +13,18 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.takg.nbay.ui.navigation.Screen
 import com.takg.nbay.ui.theme.NBayTheme
 import com.takg.nbay.ui.theme.Nsbmblue
 
 @Composable
-fun Drawer(scrollState: ScrollState, navController: NavController) {
+fun Drawer(
+    scrollState: ScrollState,
+    navController: NavController,
+    viewModel: DrawerViewModel = hiltViewModel()
+) {
 
     val menuList = listOf(
         DrawerData.Home,
@@ -70,6 +75,11 @@ fun Drawer(scrollState: ScrollState, navController: NavController) {
                                 }
                                 DrawerData.Profile -> {
                                     navController.navigate(Screen.UserProfile.route)
+                                }
+                                DrawerData.LogOut -> {
+                                    viewModel.doSignOut();
+                                    navController.popBackStack()
+                                    navController.navigate(Screen.Login.route)
                                 }
                                 else -> {
 

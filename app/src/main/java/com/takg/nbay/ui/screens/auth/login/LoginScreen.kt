@@ -22,6 +22,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
+import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -35,8 +36,7 @@ import com.takg.nbay.ui.theme.NBayTheme
 
 @Composable
 fun LoginScreen(navController: NavController, viewModel: LoginViewModel = hiltViewModel()) {
-    val email = viewModel.email.value
-    val password = viewModel.password.value
+
     var passwordvisibility by remember { mutableStateOf(false) }
 
     val context = LocalContext.current
@@ -83,7 +83,7 @@ fun LoginScreen(navController: NavController, viewModel: LoginViewModel = hiltVi
                     .padding(vertical = 15.dp)
             )
             PrimaryTextField(
-                value = email,
+                value = viewModel.email.value,
                 modifier = Modifier
                     .fillMaxWidth(),
                 keyboardOptions = KeyboardOptions(
@@ -99,7 +99,7 @@ fun LoginScreen(navController: NavController, viewModel: LoginViewModel = hiltVi
                 onValueChange = { viewModel.email.value = it }
             )
             PrimaryTextField(
-                value = password,
+                value = viewModel.password.value,
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(top = 16.dp),
@@ -114,16 +114,18 @@ fun LoginScreen(navController: NavController, viewModel: LoginViewModel = hiltVi
                 },
                 leadingIcon = { Icon(Icons.Outlined.VpnKey, contentDescription = "Password Icon") },
                 trailingIcon = {
-                    IconButton(onClick = { passwordvisibility = !passwordvisibility }) {
+                    IconButton(
+                        onClick = { passwordvisibility = !passwordvisibility },
+                    ) {
                         val icon =
                             if (passwordvisibility) Icons.Outlined.Visibility else Icons.Outlined.VisibilityOff
                         Icon(icon, contentDescription = "Visibility Password")
                     }
                 },
                 onValueChange = { viewModel.password.value = it },
-                visualTransformation = PasswordVisualTransformation()
+                visualTransformation = if (passwordvisibility) VisualTransformation.None else PasswordVisualTransformation(),
 
-            )
+                )
 
 
             Button(
