@@ -164,7 +164,7 @@ fun LoginScreen(navController: NavController, viewModel: LoginViewModel = hiltVi
                     modifier = Modifier
                         .padding(vertical = 25.dp, horizontal = 10.dp)
                         .clickable {
-                            navController.navigate("signup_screen")
+                            navController.navigate(Screen.SignUp.route)
                         })
 
             }
