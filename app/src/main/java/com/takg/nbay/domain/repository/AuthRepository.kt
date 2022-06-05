@@ -14,7 +14,7 @@ interface AuthRepository {
 
     suspend fun createUserInFirestore(): Flow<Resource<Boolean>>
 
-    suspend fun signOut(): Flow<Resource<Boolean>>
+    fun signOut()
 
     suspend fun revokeAccess(): Flow<Resource<Boolean>>
 
