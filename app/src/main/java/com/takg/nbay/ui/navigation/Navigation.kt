@@ -5,6 +5,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.takg.nbay.ui.screens.aboutus.AboutUsScreen
 import com.takg.nbay.ui.screens.auth.AuthScreen
 import com.takg.nbay.ui.screens.auth.login.LoginScreen
 import com.takg.nbay.ui.screens.auth.signup.SignUpScreen
@@ -67,6 +68,10 @@ fun Navigation(
         
         composable(route = Screen.ContactUs.route){
             ContactUsScreen(navController = navController)
+        }
+
+        composable(route = Screen.AboutUs.route){
+            AboutUsScreen(navController = navController)
         }
         composable(route = "${Screen.SingleListing.route}/{listingId}") {
             SingleListingScreen(navController = navController)

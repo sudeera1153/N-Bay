@@ -66,6 +66,7 @@ fun UserProfileContent(navController: NavController) {
 
             Button(
                 onClick = {
+                    navController.navigate(Screen.AboutUs.route)
                 },
                 modifier = Modifier
                     .fillMaxWidth()
