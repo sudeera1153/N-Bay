@@ -4,6 +4,7 @@ import android.widget.Toast
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
@@ -15,6 +16,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
@@ -38,6 +40,7 @@ fun SignUpScreen(navController: NavController, viewModel: SignUpViewModel = hilt
     val context = LocalContext.current
 
     var passwordvisibility by remember { mutableStateOf(false) }
+    val focusManager = LocalFocusManager.current
 
     LaunchedEffect(key1 = context) {
         viewModel.signUpEvents.collect {
@@ -101,6 +104,11 @@ fun SignUpScreen(navController: NavController, viewModel: SignUpViewModel = hilt
                 label = {
                     Text(text = "Name", color = Color.LightGray)
                 },
+                keyboardOptions = KeyboardOptions(
+                    imeAction = ImeAction.Done,
+                    keyboardType = KeyboardType.Text
+                ),
+                keyboardActions = KeyboardActions(onDone = { focusManager.clearFocus() }),
                 leadingIcon = { Icon(Icons.Outlined.Person, contentDescription = "Username Icon") },
                 onValueChange = { viewModel.onEvent(SignUpFormEvent.NameChanged(it)) },
                 isError = state.nameError != null
@@ -125,6 +133,7 @@ fun SignUpScreen(navController: NavController, viewModel: SignUpViewModel = hilt
                 label = {
                     Text(text = "Email", color = Color.LightGray)
                 },
+                keyboardActions = KeyboardActions(onDone = { focusManager.clearFocus() }),
                 leadingIcon = { Icon(Icons.Outlined.Email, contentDescription = "Email Icon") },
                 onValueChange = { viewModel.onEvent(SignUpFormEvent.EmailChanged(it)) },
                 isError = state.emailError != null
@@ -142,13 +151,14 @@ fun SignUpScreen(navController: NavController, viewModel: SignUpViewModel = hilt
                     .padding(top = 16.dp),
                 keyboardOptions = KeyboardOptions(
                     imeAction = ImeAction.Done,
-                    keyboardType = KeyboardType.Email
+                    keyboardType = KeyboardType.Password
                 ),
                 singleLine = true,
                 maxLines = 1,
                 label = {
                     Text(text = "Password", color = Color.LightGray)
                 },
+                keyboardActions = KeyboardActions(onDone = { focusManager.clearFocus() }),
                 leadingIcon = { Icon(Icons.Outlined.VpnKey, contentDescription = "Password Icon") },
                 trailingIcon = {
                     IconButton(onClick = { passwordvisibility = !passwordvisibility }) {

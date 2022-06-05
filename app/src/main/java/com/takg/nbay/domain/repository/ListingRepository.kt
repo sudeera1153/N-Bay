@@ -11,6 +11,7 @@ interface ListingRepository {
      * Find all listings
      */
     fun all(): Flow<Resource<List<Listing>>>
+    fun findByUserId(uid: String): Flow<Resource<List<Listing>>>
 
     /**
      * Find listing by its id

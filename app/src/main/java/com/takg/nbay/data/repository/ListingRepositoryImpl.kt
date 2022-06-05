@@ -52,6 +52,30 @@ class ListingRepositoryImpl @Inject constructor(
         }
     }
 
+    override fun findByUserId(uid: String): Flow<Resource<List<Listing>>> = callbackFlow {
+        val snapshotListener =
+            listingsRef.whereEqualTo("uid", uid)
+                .addSnapshotListener { snapshot, e ->
+                    val response = if (snapshot != null) {
+                        val listings = mutableListOf<Listing>()
+
+                        snapshot.documents.forEach { doc ->
+                            val listing = doc.toObject(Listing::class.java)
+                            listing?.id = doc.id
+                            listing?.let { listings.add(it) }
+                        }
+
+                        Resource.Success(listings)
+                    } else {
+                        Resource.Error(e?.message ?: e.toString())
+                    }
+                    trySend(response).isSuccess
+                }
+        awaitClose {
+            snapshotListener.remove()
+        }
+    }
+
     override suspend fun add(
         title: String,
         description: String,

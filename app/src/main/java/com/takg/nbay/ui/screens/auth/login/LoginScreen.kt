@@ -6,6 +6,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.*
@@ -17,6 +18,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
@@ -40,6 +42,7 @@ fun LoginScreen(navController: NavController, viewModel: LoginViewModel = hiltVi
     var passwordvisibility by remember { mutableStateOf(false) }
 
     val context = LocalContext.current
+    val focusManager = LocalFocusManager.current
 
     LaunchedEffect(context) {
         viewModel.loginEvents.collect { event ->
@@ -95,6 +98,7 @@ fun LoginScreen(navController: NavController, viewModel: LoginViewModel = hiltVi
                 label = {
                     Text(text = "Email", color = Color.LightGray)
                 },
+                keyboardActions = KeyboardActions(onDone = { focusManager.clearFocus() }),
                 leadingIcon = { Icon(Icons.Outlined.Email, contentDescription = "Email Icon") },
                 onValueChange = { viewModel.email.value = it }
             )
@@ -105,7 +109,7 @@ fun LoginScreen(navController: NavController, viewModel: LoginViewModel = hiltVi
                     .padding(top = 16.dp),
                 keyboardOptions = KeyboardOptions(
                     imeAction = ImeAction.Done,
-                    keyboardType = KeyboardType.Email
+                    keyboardType = KeyboardType.Password
                 ),
                 singleLine = true,
                 maxLines = 1,
@@ -122,6 +126,7 @@ fun LoginScreen(navController: NavController, viewModel: LoginViewModel = hiltVi
                         Icon(icon, contentDescription = "Visibility Password")
                     }
                 },
+                keyboardActions = KeyboardActions(onDone = { focusManager.clearFocus() }),
                 onValueChange = { viewModel.password.value = it },
                 visualTransformation = if (passwordvisibility) VisualTransformation.None else PasswordVisualTransformation(),
 
@@ -159,7 +164,7 @@ fun LoginScreen(navController: NavController, viewModel: LoginViewModel = hiltVi
                     modifier = Modifier
                         .padding(vertical = 25.dp, horizontal = 10.dp)
                         .clickable {
-                            navController.navigate("signup_screen")
+                            navController.navigate(Screen.SignUp.route)
                         })
 
             }
