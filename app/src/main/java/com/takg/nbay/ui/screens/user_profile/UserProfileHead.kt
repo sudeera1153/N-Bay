@@ -65,8 +65,14 @@ fun ListCountView()
 {
     Row(modifier = Modifier.fillMaxWidth()){
         Box(modifier = Modifier.weight(1f), contentAlignment = Alignment.Center){
-            Text(text = "Pending Listings",color = Color.White, style = MaterialTheme.typography.caption)
-            Text(text = "000",color = Color.White, style = MaterialTheme.typography.h5)
+            Row {
+                Text(text = "Pending Listings",color = Color.White, style = MaterialTheme.typography.caption)
+            }
+            Row {
+                Text(text = "000",color = Color.White, style = MaterialTheme.typography.h5)
+            }
+
+
         }
         Box(modifier = Modifier.weight(1f), contentAlignment = Alignment.Center){
             Text(text = "In Progress Listings",color = Color.White, style = MaterialTheme.typography.caption)
